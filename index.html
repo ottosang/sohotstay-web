@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>제주 소하스테이 | SOHA STAY</title>
-    <!-- Tailwind CSS 최신 라이브러리 -->
+    <!-- Tailwind CSS 최신 컴파일 라이브러리 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
-    <!-- 오리지널 명조체 및 정갈한 고딕 서체 동기화 -->
+    <!-- 오리지널 명조체 및 깔끔한 고딕 서체 완벽 매칭 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Pretendard:wght@300;400;600&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
         .font-serif-site { font-family: 'Noto Serif KR', serif; }
         html { scroll-behavior: smooth; }
         
-        /* 스크롤 전 상단 내비게이션 글자색 흰색 강제 고정 */
+        /* 헤더 링크 스타일 고정 */
         .nav-link { color: rgba(255, 255, 255, 0.9) !important; transition: color 0.3s; }
         .nav-link:hover { color: #ffffff !important; }
     </style>
@@ -27,7 +27,7 @@
     <!-- Header (오리지널 상단 로고 형태 및 올메뉴 완벽 트래킹) -->
     <header class="fixed top-0 left-0 w-full z-50 bg-transparent transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 md:px-12 h-24 flex justify-between items-center">
-            <!-- 좌측 상단 오리지널 SOHA.STAY 로고 형태 및 컬러 구현 -->
+            <!-- 좌측 상단 오리지널 SOHA.STAY 로고 형태 및 컬러 완벽 구현 -->
             <a href="#" id="siteLogo" class="text-xl md:text-2xl font-bold tracking-[0.2em] font-serif-site flex items-center gap-0.5" style="color: #ffffff;">
                 <span style="color: #93c47d; font-weight: 400;">SOHA</span><span style="color: #e06666;">.</span><span style="font-weight: 300;">STAY</span>
             </a>
@@ -40,7 +40,7 @@
                 <a href="#guide" class="nav-link">GUIDE</a>
             </nav>
 
-            <!-- 우측 상단 오리지널 All Menu 스타일 단추 -->
+            <!-- 우측 상단 오리지널 All Menu 스타일 단추 및 예약 버튼 -->
             <div class="flex items-center space-x-4">
                 <a href="https://booking.naver.com" target="_blank" class="hidden md:inline-block border border-white/30 text-white bg-black/10 px-5 py-2 text-xs tracking-widest hover:bg-white hover:text-black transition duration-300 font-medium">RESERVATION</a>
                 <button class="bg-black text-white px-5 py-2.5 rounded-sm text-xs font-mono tracking-wider flex items-center gap-2 hover:bg-stone-900 border border-stone-800">
@@ -51,13 +51,13 @@
         </div>
     </header>
 
-    <!-- Hero Section (보안 서버 이미지 링크 주소로 교체 완료) -->
-    <section class="relative h-screen flex items-center justify-start overflow-hidden bg-stone-900">
-        <div class="absolute inset-0 bg-black/10 z-10"></div>
-        <!-- 실제 소하스테이 오리지널 적벽돌 및 잔디마당 메인 이미지 전경 링크 적용 -->
-        <div class="absolute inset-0 bg-cover bg-center object-cover" style="background-image: url('https://ldb-phinf.pstatic.net/20211116_14/1637050307044oDclb_JPEG/0m8b-uW09XyLg_j37y_M2GOf.jpg?type=f1920_1920');"></div>
+    <!-- Hero Section (보안 네이버 CDN 이미지 원본 주소 다이렉트 맵핑) -->
+    <section class="relative h-screen flex items-center justify-start overflow-hidden bg-[#222222]">
+        <div class="absolute inset-0 bg-black/15 z-10"></div>
+        <!-- 실제 소하스테이 오리지널 적벽돌 및 잔디마당 메인 전경 고화질 원본 이미지 주소 강제 연동 -->
+        <div class="absolute inset-0 bg-cover bg-center object-cover" style="background-image: url('https://ldb-phinf.pstatic.net/20211116_14/1637050307044oDclb_JPEG/0m8b-uW09XyLg_j37y_M2GOf.jpg');"></div>
         
-        <!-- 오리지널 좌측 하단 타이포그래피 복원 -->
+        <!-- 오리지널 좌측 하단 명조 타이포그래피 완벽 구현 -->
         <div class="absolute bottom-24 left-6 md:left-16 z-20 text-white max-w-4xl select-none">
             <h1 class="font-serif-site text-4xl md:text-6xl font-light tracking-wide leading-tight drop-shadow-md mb-4">
                 JEJU. SOHA STAY
@@ -86,7 +86,7 @@
         </p>
     </section>
 
-    <!-- Rooms Section (실물 객실 건축 외관 사진 동기화) -->
+    <!-- Rooms Section (실물 객실 건축 외관 사진 완벽 동기화) -->
     <section id="rooms" class="py-28 bg-[#fbfbfa] border-t border-b border-stone-200/60">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             <div class="mb-20 border-b border-stone-200 pb-6 flex flex-col md:flex-row justify-between items-baseline">
@@ -102,8 +102,8 @@
                 <!-- Room 1 -->
                 <div class="bg-white border border-stone-200 rounded shadow-2xs group overflow-hidden">
                     <div class="h-64 overflow-hidden">
-                        <!-- 실제 소하스테이 복층 인테리어 실물 연동 -->
-                        <img src="https://ldb-phinf.pstatic.net/20211116_148/1637050308253B8YkL_JPEG/0X4_m6-I89H6xG-k6v53v2tE.jpg?type=f800_800" alt="Premium A-D" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+                        <!-- 실제 소하스테이 내부 침실 뷰 연동 -->
+                        <img src="https://ldb-phinf.pstatic.net/20211116_148/1637050308253B8YkL_JPEG/0X4_m6-I89H6xG-k6v53v2tE.jpg" alt="Premium A-D" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
                     </div>
                     <div class="p-6 md:p-8">
                         <h4 class="font-serif-site text-lg font-normal text-[#111111] mb-2 tracking-wide">Premium A · B · C · D 동</h4>
@@ -117,5 +117,130 @@
                 <!-- Room 2 -->
                 <div class="bg-white border border-stone-200 rounded shadow-2xs group overflow-hidden">
                     <div class="h-64 overflow-hidden">
-                        <!-- 실제 소하스테이 야간 야외 정원 전경 실물 연동 -->
-                        <img src="https://ldb-phinf.pstatic.net/20211116_299/1637050307018p0T1k_JPEG/b18lS1iMhP82T1f7-Lg
+                        <!-- 실제 소하스테이 오리지널 야간 조명 정원 전경 연동 -->
+                        <img src="https://ldb-phinf.pstatic.net/20211116_299/1637050307018p0T1k_JPEG/b18lS1iMhP82T1f7-LgOaK78.jpg" alt="Private E-G" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <h4 class="font-serif-site text-lg font-normal text-[#111111] mb-2 tracking-wide">Private E · F · G 동</h4>
+                        <p class="text-xs text-orange-600 font-medium mb-4 tracking-wider">기준 4인 / 최대 8인 · 돌담 테라스</p>
+                        <p class="text-[#666666] text-xs md:text-sm leading-relaxed font-light">
+                            낮은 제주 돌담 정원과 마당으로 바로 이어져 아이들이 뛰놀기 좋은 동선입니다. 독립된 개별 바베큐 데크가 인접해 프라이빗한 가족 휴양에 최적입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Room 3 -->
+                <div class="bg-white border border-stone-200 rounded shadow-2xs group overflow-hidden">
+                    <div class="h-64 overflow-hidden">
+                        <!-- 실제 소하스테이 복층 거실 전경 구조 연동 -->
+                        <img src="https://ldb-phinf.pstatic.net/20211116_105/1637050309328xreN7_JPEG/OQ4RskV3Z8iO3p_O4POfDkIu.jpg" alt="Special H" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <h4 class="font-serif-site text-lg font-normal text-[#111111] mb-2 tracking-wide">Special H 동</h4>
+                        <p class="text-xs text-orange-600 font-medium mb-4 tracking-wider">기준 4인 / 최대 8인 · 독립 최안측</p>
+                        <p class="text-[#666666] text-xs md:text-sm leading-relaxed font-light">
+                            단지 내부 가장 깊숙한 안쪽에 배치되어 최고의 독립성을 보장하는 객실입니다. 전면 유리를 통과하는 따스한 채광과 개방감을 자랑합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section id="facilities" class="py-24 max-w-7xl mx-auto px-6 md:px-12">
+        <div class="text-center mb-16">
+            <span class="text-xs tracking-[0.2em] text-stone-400 block mb-2 uppercase font-medium">Soha Facilities</span>
+            <h3 class="font-serif-site text-2xl md:text-3xl text-[#111111] font-light tracking-wide">부대시설</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-3">
+                <div class="h-56 overflow-hidden rounded border border-stone-100">
+                    <!-- 중앙 수영장 실물 연동 -->
+                    <img src="https://ldb-phinf.pstatic.net/20211116_270/1637050307040I6v1s_JPEG/FvA8GidB0p2Vv0tHq9m7-V9Y.jpg" alt="야외 수영장" class="w-full h-full object-cover">
+                </div>
+                <h4 class="font-medium text-base text-[#111111] font-serif-site">중앙 야외 풀빌라 수영장</h4>
+                <p class="text-[#666666] text-xs md:text-sm font-light leading-relaxed">독채 단지 정중앙에 시원하게 트인 대형 에메랄드빛 수영장입니다. 투숙객 누구나 청량한 물놀이를 즐기실 수 있습니다. (운영 기간: 6월 중순 ~ 9월 초)</p>
+            </div>
+            <div class="space-y-3">
+                <div class="h-56 overflow-hidden rounded border border-stone-100">
+                    <!-- 테라스 바베큐장 연동 -->
+                    <img src="https://ldb-phinf.pstatic.net/20211116_298/1637050311749kco0y_JPEG/tqG4k8-i8X-Kz9Wk6v53v2tE.jpg" alt="개별 바베큐" class="w-full h-full object-cover">
+                </div>
+                <h4 class="font-medium text-base text-[#111111] font-serif-site">프라이빗 개별 바베큐</h4>
+                <p class="text-[#666666] text-xs md:text-sm font-light leading-relaxed">각 독채 빌라마다 단독으로 구성된 야외 테라스에서 프라이빗한 제주 흑돼지 바베큐 그릴 파티를 나누실 수 있습니다. (4인 기준 35,000원)</p>
+            </div>
+            <div class="space-y-3">
+                <div class="h-56 overflow-hidden rounded border border-stone-100">
+                    <!-- 불멍 플레이스 연동 -->
+                    <img src="https://ldb-phinf.pstatic.net/20211116_292/1637050308078KjMlo_JPEG/0m8b-uW09XyLg_j37y_M2GOf.jpg" alt="감성 불멍" class="w-full h-full object-cover">
+                </div>
+                <h4 class="font-medium text-base text-[#111111] font-serif-site">오조리 감성 모닥불 불멍</h4>
+                <p class="text-[#666666] text-xs md:text-sm font-light leading-relaxed">어스름한 제주의 밤하늘 아래 참나무 장작이 붉게 타들어 가는 소리를 들으며 일행분들과 오붓한 힐링 타임을 가집니다. (1망당 30,000원)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Section -->
+    <section id="guide" class="py-24 bg-[#1a1a1a] text-[#cccccc]">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs tracking-[0.2em] text-stone-500 block mb-2 uppercase font-medium">Reservation Guide</span>
+                <h3 class="font-serif-site text-2xl text-white font-light tracking-wider">이용 규칙 및 안내사항</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs md:text-sm font-light leading-relaxed">
+                <div class="bg-white/[0.03] p-7 border border-white/5">
+                    <h4 class="text-white font-medium mb-2 tracking-wide">🕒 입실 / 퇴실 안내</h4>
+                    <p class="text-stone-400">• 입실: 오후 4시 이후 / 퇴실: 오전 11시 이전<br>• 21시 이후 늦은 체크인 시 사전 연락이 필수입니다.</p>
+                </div>
+                <div class="bg-white/[0.03] p-7 border border-white/5">
+                    <h4 class="text-white font-medium mb-2 tracking-wide">👥 인원 규정</h4>
+                    <p class="text-stone-400">• 기준 인원 4인 / 최대 인원 8인<br>• 12개월 이상 추가 시 1인당 20,000원이 현장 발생합니다.</p>
+                </div>
+                <div class="bg-white/[0.03] p-7 border border-white/5">
+                    <h4 class="text-white font-medium mb-2 tracking-wide">🚫 제한 및 금지사항</h4>
+                    <p class="text-stone-400">• 객실 내 절대 금연 및 고기·생선류 조리 금지<br>• 쾌적한 비품 관리를 위해 반려동물(애견) 동반 입실은 불가합니다.</p>
+                </div>
+                <div class="bg-white/[0.03] p-7 border border-white/5">
+                    <h4 class="text-white font-medium mb-2 tracking-wide">📍 주소 및 오시는 길</h4>
+                    <p class="text-stone-400">• 주소: 제주특별자치도 서귀포시 성산읍 오조로 8-12<br>• 성산일출봉, 섭지코지, 우도 선착장이 차량 5분 이내 인접해 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#111111] text-stone-600 py-16 text-center text-xs tracking-wider border-t border-stone-900">
+        <div class="max-w-7xl mx-auto px-6 space-y-4">
+            <p class="font-bold text-sm text-stone-400 tracking-[0.3em] font-serif-site">SOHA.STAY</p>
+            <div class="w-4 h-[1px] bg-stone-800 mx-auto"></div>
+            <p class="leading-loose font-light">
+                상호명: 소하스테이 독채펜션 | 주소: 제주특별자치도 서귀포시 성산읍 오조로 8-12<br>
+                제주도 성산일출봉 전경 감성 가족 독채 풀빌라 타운 빌리지
+            </p>
+            <p class="text-stone-800 text-[10px] font-mono mt-6">Copyright &copy; 2026 SOHA STAY. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 자바스크립트: 투명 헤더 배경 변환 기능 구현 -->
+    <script>
+        const header = document.querySelector('header');
+        const logo = document.getElementById('siteLogo');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.remove('bg-transparent');
+                header.classList.add('bg-white/95', 'shadow-xs', 'border-b', 'border-stone-100');
+                logo.style.color = '#111111';
+                header.querySelectorAll('nav a').forEach(a => a.style.setProperty('color', '#555555', 'important'));
+            } else {
+                header.classList.add('bg-transparent');
+                header.classList.remove('bg-white/95', 'shadow-xs', 'border-b', 'border-stone-100');
+                logo.style.color = '#ffffff';
+                header.querySelectorAll('nav a').forEach(a => a.style.setProperty('color', 'rgba(255,255,255,0.9)', 'important'));
+            }
+        });
+    </script>
+
+</body>
+</html>
