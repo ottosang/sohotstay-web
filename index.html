@@ -1,594 +1,201 @@
-:root {
-        --shilla-brown: #2B2523;      /* 신라스테이 특유의 도회적인 딥 브라운 */
-        --shilla-gold: #BC9C6C;       /* 세련되고 은은한 무드의 시그니처 골드 */
-        --shilla-bg: #F4F1EE;         /* 차분하고 고급스러운 오프화이트 배경 */
-        --text-dark: #333333;
-        --white: #ffffff;
-        --border-line: rgba(43, 37, 35, 0.08);
-    }
-
-    body {
-        font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-        background-color: var(--shilla-bg);
-        color: var(--text-dark);
-        line-height: 1.8;
-        overflow-x: hidden;
-        letter-spacing: -0.02em;
-    }
-
-    /* Typography Customizing */
-    .shilla-serif {
-        font-family: 'Times New Roman', 'Didot', 'Cinzel', serif;
-        letter-spacing: 0.15em;
-    }
-
-    /* Header Navigation */
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 20px 60px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 1000;
-        background: rgba(244, 241, 238, 0.92);
-        backdrop-filter: blur(15px);
-        border-bottom: 1px solid var(--border-line);
-    }
-
-    .brand-logo {
-        text-align: left;
-    }
-
-    .brand-logo a {
-        font-size: 20px;
-        font-weight: 400;
-        text-transform: uppercase;
-        color: var(--shilla-brown);
-        text-decoration: none;
-        display: block;
-        letter-spacing: 0.2em;
-    }
-
-    .brand-logo span {
-        font-size: 9px;
-        text-transform: uppercase;
-        color: var(--shilla-gold);
-        letter-spacing: 0.35em;
-        display: block;
-        margin-top: 2px;
-    }
-
-    nav {
-        display: flex;
-        align-items: center;
-    }
-
-    nav a {
-        text-decoration: none;
-        color: var(--shilla-brown);
-        font-size: 13px;
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        margin-right: 40px;
-        transition: color 0.3s;
-    }
-
-    nav a:hover {
-        color: var(--shilla-gold);
-    }
-
-    .btn-book-now {
-        background-color: var(--shilla-brown);
-        color: var(--white) !important;
-        padding: 12px 30px;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        margin-right: 0;
-        transition: background-color 0.3s;
-    }
-
-    .btn-book-now:hover {
-        background-color: var(--shilla-gold);
-        color: var(--white) !important;
-    }
-
-    /* Hero Visual Section */
-    .hero-banner {
-        height: 100vh;
-        background: linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('다운로드 (2).jpg') no-repeat center center/cover;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: var(--white);
-    }
-
-    .hero-banner h1 {
-        font-size: 52px;
-        font-weight: 300;
-        text-transform: uppercase;
-        margin-bottom: 12px;
-        text-shadow: 0 2px 15px rgba(0,0,0,0.15);
-    }
-
-    .hero-banner p {
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.4em;
-        color: var(--shilla-bg);
-        text-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    }
-
-    /* Container & Grid Setup */
-    .shilla-container {
-        max-width: 1260px;
-        margin: 0 auto;
-        padding: 0 30px;
-    }
-
-    /* Overview Section */
-    .overview-wrap {
-        text-align: center;
-        padding: 120px 0;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .sub-title-tag {
-        font-size: 11px;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: var(--shilla-gold);
-        margin-bottom: 25px;
-        display: block;
-        font-weight: 600;
-    }
-
-    .main-title {
-        font-size: 34px;
-        color: var(--shilla-brown);
-        margin-bottom: 35px;
-        font-weight: 400;
-        letter-spacing: 0.02em;
-    }
-
-    .desc-paragraph {
-        font-size: 15px;
-        color: #555555;
-        line-height: 1.9;
-        margin-bottom: 20px;
-        word-break: keep-all;
-    }
-
-    /* Line Accent */
-    .shilla-line {
-        width: 40px;
-        height: 1px;
-        background-color: var(--shilla-gold);
-        margin: 40px auto;
-    }
-
-    /* Premium Showcase (Masonry Grid Style matching uploaded photos) */
-    .showcase-grid {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 25px;
-        margin-bottom: 100px;
-    }
-
-    .grid-box {
-        position: relative;
-        overflow: hidden;
-        border-radius: 2px;
-        background-color: #dfd9cc;
-    }
-
-    .grid-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
-
-    .grid-box:hover img {
-        transform: scale(1.03);
-    }
-
-    /* Grid Item Spans Configuration */
-    .box-col-8 { grid-column: span 8; height: 500px; }
-    .box-col-4 { grid-column: span 4; height: 500px; }
-    .box-col-6 { grid-column: span 6; height: 400px; }
-    .box-col-4-sm { grid-column: span 4; height: 320px; }
-
-    /* Feature Row Layout */
-    .feature-row {
-        display: flex;
-        align-items: center;
-        gap: 80px;
-        padding: 100px 0;
-        border-top: 1px solid var(--border-line);
-    }
-
-    .feature-row.reverse {
-        flex-direction: row-reverse;
-    }
-
-    .feature-img-side {
-        flex: 1.2;
-        height: 520px;
-    }
-
-    .feature-img-side img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 2px;
-    }
-
-    .feature-text-side {
-        flex: 1;
-    }
-
-    .feature-text-side h3 {
-        font-size: 26px;
-        color: var(--shilla-brown);
-        margin-bottom: 20px;
-    }
-
-    /* Accommodation & Package Section (Karaoke Choice Included) */
-    .accommodation-section {
-        padding: 120px 0;
-        border-top: 1px solid var(--border-line);
-    }
-
-    .room-package-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        margin-top: 50px;
-    }
-
-    .package-card {
-        background-color: var(--white);
-        border: 1px solid rgba(43, 37, 35, 0.05);
-        border-radius: 2px;
-        overflow: hidden;
-        transition: box-shadow 0.3s;
-    }
-
-    .package-card:hover {
-        box-shadow: 0 15px 40px rgba(43, 37, 35, 0.06);
-    }
-
-    .package-img {
-        width: 100%;
-        height: 380px;
-        object-fit: cover;
-    }
-
-    .package-body {
-        padding: 45px;
-    }
-
-    .package-badge {
-        font-size: 11px;
-        font-weight: 600;
-        color: var(--shilla-gold);
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        margin-bottom: 12px;
-        display: block;
-    }
-
-    .package-title {
-        font-size: 22px;
-        color: var(--shilla-brown);
-        margin-bottom: 20px;
-    }
-
-    .package-list {
-        list-style: none;
-        margin-top: 25px;
-        border-top: 1px solid var(--border-line);
-        padding-top: 25px;
-    }
-
-    .package-list li {
-        font-size: 14px;
-        color: #666666;
-        margin-bottom: 10px;
-        position: relative;
-        padding-left: 20px;
-    }
-
-    .package-list li::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 10px;
-        width: 4px;
-        height: 4px;
-        background-color: var(--shilla-gold);
-    }
-
-    /* Hotel Spec Bar */
-    .hotel-spec-bar {
-        background-color: var(--shilla-brown);
-        color: var(--shilla-bg);
-        padding: 70px 0;
-        display: flex;
-        justify-content: space-around;
-        text-align: center;
-        border-radius: 2px;
-        margin-bottom: 100px;
-    }
-
-    .spec-num-title {
-        font-size: 30px;
-        font-weight: 300;
-        color: var(--white);
-        margin-bottom: 8px;
-        letter-spacing: 0.05em;
-    }
-
-    .spec-num-label {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: var(--shilla-gold);
-    }
-
-    /* Call To Action Box */
-    .cta-box {
-        text-align: center;
-        background-color: var(--white);
-        border: 1px solid var(--border-line);
-        padding: 100px 40px;
-        margin-bottom: 120px;
-    }
-
-    .cta-box h2 {
-        font-size: 28px;
-        color: var(--shilla-brown);
-        margin-bottom: 20px;
-    }
-
-    .shilla-btn {
-        display: inline-block;
-        background-color: var(--shilla-brown);
-        color: var(--white);
-        text-decoration: none;
-        padding: 16px 50px;
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        margin-top: 30px;
-        transition: background-color 0.3s, transform 0.3s;
-    }
-
-    .shilla-btn:hover {
-        background-color: var(--shilla-gold);
-        transform: translateY(-2px);
-    }
-
-    /* Hotel Footer Style */
-    footer {
-        background-color: #1E1A19;
-        color: #999999;
-        padding: 80px 60px;
-        font-size: 12px;
-        border-top: 4px solid var(--shilla-gold);
-    }
-
-    .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .footer-left h4 {
-        font-size: 16px;
-        color: var(--white);
-        margin-bottom: 20px;
-        font-weight: 400;
-        letter-spacing: 0.15em;
-    }
-
-    .footer-left p {
-        margin-bottom: 8px;
-        color: #888888;
-    }
-
-    .footer-right {
-        text-align: right;
-    }
-
-    .footer-right p {
-        color: #666666;
-        margin-bottom: 6px;
-    }
-
-    /* Responsive UI Optimization */
-    @media (max-width: 1024px) {
-        header { padding: 20px 30px; }
-        nav a { margin-right: 25px; }
-        .showcase-grid { grid-template-columns: 1fr; }
-        .grid-box { grid-column: span 12 !important; height: 350px !important; }
-        .feature-row { flex-direction: column !important; gap: 40px; padding: 60px 0; }
-        .feature-img-side { width: 100%; height: 350px; }
-        .room-package-grid { grid-template-columns: 1fr; }
-        .footer-content { flex-direction: column; gap: 40px; }
-        .footer-right { text-align: left; }
-    }
-</style>
-<!-- Hotel Header Navigation -->
-<header>
-    <div class="brand-logo">
-        <a href="#" class="shilla-serif">soha stay</a>
-        <span>the thermal spa</span>
-    </div>
-    <nav>
-        <a href="#brand-story">BRAND</a>
-        <a href="#spa-landscape">SPA & VIEW</a>
-        <a href="#room-packages">ROOMS</a>
-        <a href="#reservation" class="btn-book-now">book now</a>
-    </nav>
-</header>
-
-<!-- Hero Visual Area -->
-<section class="hero-banner">
-    <h1 class="shilla-serif">soha stay</h1>
-    <p>The Thermal Spa & Private Resort</p>
-</section>
-
-<div class="shilla-container">
-    
-    <!-- Brand Story Section -->
-    <section id="brand-story" class="overview-wrap">
-        <span class="sub-title-tag">The Architecture of Relaxation</span>
-        <h2 class="main-title shilla-serif">정제된 휴식, 완벽한 프라이버시의 완성</h2>
-        <p class="desc-paragraph">제주 서귀포 성산읍 오조리의 아늑한 자연경관 위에 정교하게 자리 잡은 소하스테이는 타협하지 않는 최고급 독채 휴양 환경을 선사합니다.</p>
-        <p class="desc-paragraph">단정한 붉은 벽돌의 외관과 현무암 돌담의 조화는 리조트에 들어선 순간부터 도심의 소음을 완전히 차단하며, 오직 귀하만을 위해 흐르는 고요한 온천 공간으로 안내합니다.</p>
-        <div class="shilla-line"></div>
-    </section>
-
-    <!-- Premium Gallery Showcase (Using User Photo Filenames) -->
-    <section class="showcase-grid">
-        <div class="grid-box box-col-8">
-            <img src="다운로드 (6).jpg" alt="Soha Stay Exterior Dusk Horizon">
-        </div>
-        <div class="grid-box box-col-4">
-            <img src="다운로드.jpeg" alt="Soha Stay Front View Entrance">
-        </div>
-        <div class="grid-box box-col-4">
-            <img src="다운로드 (4).jpg" alt="Soha Stay Balcony Structural Angle">
-        </div>
-        <div class="grid-box box-col-8">
-            <img src="다운로드 (7).jpeg" alt="Soha Stay High-End Living Lounge">
-        </div>
-    </section>
-
-    <!-- Feature Highlight 1: The Thermal Spa -->
-    <section id="spa-landscape" class="feature-row">
-        <div class="feature-img-side">
-            <img src="다운로드 (8).jpg" alt="Premium In-Villa Hot Spring Jacuzzi">
-        </div>
-        <div class="feature-text-side">
-            <span class="sub-title-tag">Signature Experience</span>
-            <h3 class="shilla-serif">천연 암반 온천수 자쿠지</h3>
-            <p class="desc-paragraph">이번 달 시공 완료된 최첨단 단독 온천수 자쿠지 시스템입니다. 제주의 사계절 하늘을 지붕 삼아 야외 테라스에서 즐기는 고품격 스파 테라피는 투숙객의 신체적 피로를 완벽하게 해소하고 정신적 비움을 유도합니다.</p>
-        </div>
-    </section>
-
-    <!-- Feature Highlight 2: Framed Sunrise View -->
-    <section class="feature-row reverse">
-        <div class="feature-img-side">
-            <img src="다운로드 (3).jpg" alt="Iconic Window View of Seongsan Ilchulbong">
-        </div>
-        <div class="feature-text-side">
-            <span class="sub-title-tag">Architectural View</span>
-            <h3 class="shilla-serif">창문 너머 예술이 되는 성산일출봉</h3>
-            <p class="desc-paragraph">거실과 독립 침실의 통창은 제주의 랜드마크인 성산일출봉을 한 폭의 동양화처럼 담아내도록 정밀하게 설계되었습니다. 침대에 누워 마주하는 찬란한 아침의 일출은 소하스테이에서만 경험할 수 있는 독보적인 조망 가치입니다.</p>
-        </div>
-    </section>
-
-    <!-- Accommodation & Package Selection Section (Karaoke Feature integrated) -->
-    <section id="room-packages" class="accommodation-section">
-        <div style="text-align: center; margin-bottom: 30px;">
-            <span class="sub-title-tag">Exclusive Room Packages</span>
-            <h2 class="main-title shilla-serif">프라이빗 독채 스위트 제안</h2>
-        </div>
-
-        <div class="room-package-grid">
-            
-            <!-- Room Option A: Private Entertainment Suite (노래방) -->
-            <div class="package-card">
-                <img class="package-img" src="다운로드 (7).jpeg" alt="Soha Stay Living Room View">
-                <div class="package-body">
-                    <span class="package-badge">Option 01 / Entertainment Suite</span>
-                    <h4 class="package-title shilla-serif">프라이빗 노래방 완비 독채 객실</h4>
-                    <p class="desc-paragraph" style="font-size: 14px;">설계 단계부터 완벽한 방음 하드웨어를 반영하여 독립적인 사운드룸 연회가 가능한 프리미엄 최고급 객실 타입입니다. 대가족이나 소모임 투숙객이 주변 간섭이나 소음 민원 걱정 없이 최고급 음향 기기와 무선 마이크 시스템으로 고품격 엔터테인먼트를 안전하게 향유하실 수 있습니다.</p>
-                    <ul class="package-list">
-                        <li>방음 특화 인프라 및 최고사양 노래방 기기 연동</li>
-                        <li>3 Premium Beds (독립형 침대 3개 구조) & 2 Luxury Bathrooms</li>
-                        <li>개별 아웃도어 수영장 및 온천수 자쿠지 전용 동선 제공</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Room Option B: Relaxation Spa Suite -->
-            <div class="package-card">
-                <img class="package-img" src="다운로드 (1).jpeg" alt="Soha Stay Bedroom View">
-                <div class="package-body">
-                    <span class="package-badge">Option 02 / Relaxation Spa Suite</span>
-                    <h4 class="package-title shilla-serif">오가닉 테라피 릴랙싱 독채 객실</h4>
-                    <p class="desc-paragraph" style="font-size: 14px;">시각적 미니멀리즘과 자연광의 조화를 통해 최고 수준의 휴식과 수면의 질을 보장하는 스파 전용 객실입니다. 침실 와이드 와이드 윈도우를 통해 전해지는 성산의 풍경에 집중하며 마음의 균형을 되찾는 진정한 오가닉 스테이를 지원합니다.</p>
-                    <ul class="package-list">
-                        <li>침실 가로 와이드 윈도우를 통한 성산일출봉 액자 조망 특화</li>
-                        <li>최고급 고중량(500g) 호텔 리조트 전용 오가닉 린넨 가운 비치</li>
-                        <li>천연 암반 온천욕을 위한 웰컴 아로마 스파 솔트 제공</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Sub Mini Gallery Grid -->
-    <section class="landscape-grid">
-        <div class="grid-box box-col-4-sm"><img src="다운로드 (5).jpeg" alt="Soha Stay Bed Area View"></div>
-        <div class="grid-box box-col-4-sm"><img src="다운로드 (9).jpg" alt="Soha Stay Palm Garden"></div>
-        <div class="grid-box box-col-4-sm"><img src="다운로드 (1).jpeg" alt="Soha Stay Light Bed Setup"></div>
-    </section>
-
-    <!-- Hotel Spec Summary Bar -->
-    <section class="hotel-spec-bar">
-        <div>
-            <div class="spec-num-title shilla-serif">3 BED SUITE</div>
-            <div class="spec-num-label">프리미엄 베드 시스템</div>
-        </div>
-        <div>
-            <div class="spec-num-title shilla-serif">2 BATHROOMS</div>
-            <div class="spec-num-label">독립형 동선 분리 욕실</div>
-        </div>
-        <div>
-            <div class="spec-num-title shilla-serif">100% PRIVATE</div>
-            <div class="spec-num-label">완벽히 격리된 독채 세팅</div>
-        </div>
-    </section>
-
-    <!-- Call To Action Area -->
-    <section id="reservation" class="cta-box">
-        <span class="sub-title-tag">Direct Booking Advantage</span>
-        <h2 class="shilla-serif">soha stay : the thermal spa</h2>
-        <p class="desc-paragraph" style="max-width: 650px; margin: 0 auto; font-size: 14px;">공식 웹사이트 예약을 통한 직접 거래 고객님에 한해 특별 웰컴 기프트 패키지(야외 불멍 화로 세트 또는 최고급 바비큐 그릴 세팅)가 무상으로 프리 로딩됩니다.</p>
-        <a href="#" class="shilla-btn">객실 예약 현황 조회</a>
-    </section>
-
-</div>
-
-<!-- Hotel Style Footer Area -->
-<footer>
-    <div class="footer-content">
-        <div class="footer-left">
-            <h4 class="shilla-serif">SOHA STAY</h4>
-            <p>상호명: 소하스테이 독채펜션 | 대표자: 이미숙</p>
-            <p>사업장 주소: 대한민국 제주특별자치도 서귀포시 성산읍 오조로 8-12</p>
-            <p>공식 브랜드 위탁운영 및 테크니컬 파트너: 디앤테크 (DN Tech)</p>
-        </div>
-        <div class="footer-right">
-            <p>© 2026 SOHA STAY. All Rights Reserved.</p>
-            <p style="font-size: 11px; color: #555555; margin-top: 10px;">The Shilla Stay Style Inspired Architecture Framework.</p>
-        </div>
-    </div>
-</footer>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOHA STAY | The Thermal Spa</title>
+    <style>
+        /* Shilla Stay Boutique Tone & Manner Design System */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --shilla-brown: #2B2523;      /* 신라스테이 특유의 도회적인 딥 브라운 */
+            --shilla-gold: #BC9C6C;       /* 세련되고 은은한 무드의 시그니처 골드 */
+            --shilla-bg: #F4F1EE;         /* 차분하고 고급스러운 오프화이트 배경 */
+            --text-dark: #333333;
+            --white: #ffffff;
+            --border-line: rgba(43, 37, 35, 0.08);
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--shilla-bg);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+            letter-spacing: -0.02em;
+        }
+
+        /* Typography Customizing */
+        .shilla-serif {
+            font-family: 'Times New Roman', 'Didot', 'Cinzel', serif;
+            letter-spacing: 0.15em;
+        }
+
+        /* Header Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(244, 241, 238, 0.92);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-line);
+        }
+
+        .brand-logo {
+            text-align: left;
+        }
+
+        .brand-logo a {
+            font-size: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
+            color: var(--shilla-brown);
+            text-decoration: none;
+            display: block;
+            letter-spacing: 0.2em;
+        }
+
+        .brand-logo span {
+            font-size: 9px;
+            text-transform: uppercase;
+            color: var(--shilla-gold);
+            letter-spacing: 0.35em;
+            display: block;
+            margin-top: 2px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--shilla-brown);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-right: 40px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--shilla-gold);
+        }
+
+        .btn-book-now {
+            background-color: var(--shilla-brown);
+            color: var(--white) !important;
+            padding: 12px 30px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-right: 0;
+            transition: background-color 0.3s;
+        }
+
+        .btn-book-now:hover {
+            background-color: var(--shilla-gold);
+            color: var(--white) !important;
+        }
+
+        /* Hero Visual Section */
+        .hero-banner {
+            height: 100vh;
+            background: linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('다운로드 (2).jpg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-banner h1 {
+            font-size: 52px;
+            font-weight: 300;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.15);
+        }
+
+        .hero-banner p {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: var(--shilla-bg);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Container & Grid Setup */
+        .shilla-container {
+            max-width: 1260px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Overview Section */
+        .overview-wrap {
+            text-align: center;
+            padding: 120px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .sub-title-tag {
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--shilla-gold);
+            margin-bottom: 25px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .main-title {
+            font-size: 34px;
+            color: var(--shilla-brown);
+            margin-bottom: 35px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .desc-paragraph {
+            font-size: 15px;
+            color: #555555;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        /* Line Accent */
+        .shilla-line {
+            width: 40px;
+            height: 1px;
+            background-color: var(--shilla-gold);
+            margin: 40px auto;
+        }
+
+        /* Premium Showcase (Masonry Grid Style matching uploaded photos) */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+            margin-bottom: 100px;
+        }
+
+        .grid-box {
+            position: relative;
+            overflow: hidden;
