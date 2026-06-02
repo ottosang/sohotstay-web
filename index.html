@@ -13,9 +13,9 @@
         }
         
         :root {
-            --shilla-brown: #2B2523;      /* 신라스테이 특유의 도회적인 딥 브라운 */
-            --shilla-gold: #BC9C6C;       /* 세련되고 은은한 무드의 시그니처 골드 */
-            --shilla-bg: #F4F1EE;         /* 차분하고 고급스러운 오프화이트 배경 */
+            --shilla-brown: #2B2523;
+            --shilla-gold: #BC9C6C;
+            --shilla-bg: #F4F1EE;
             --text-dark: #333333;
             --white: #ffffff;
             --border-line: rgba(43, 37, 35, 0.08);
@@ -30,13 +30,11 @@
             letter-spacing: -0.02em;
         }
 
-        /* Typography Customizing */
         .shilla-serif {
             font-family: 'Times New Roman', 'Didot', 'Cinzel', serif;
             letter-spacing: 0.15em;
         }
 
-        /* Header Navigation */
         header {
             position: fixed;
             top: 0;
@@ -50,10 +48,6 @@
             background: rgba(244, 241, 238, 0.92);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border-line);
-        }
-
-        .brand-logo {
-            text-align: left;
         }
 
         .brand-logo a {
@@ -73,11 +67,6 @@
             letter-spacing: 0.35em;
             display: block;
             margin-top: 2px;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
         }
 
         nav a {
@@ -102,19 +91,16 @@
             font-weight: 600;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-right: 0;
             transition: background-color 0.3s;
         }
 
         .btn-book-now:hover {
             background-color: var(--shilla-gold);
-            color: var(--white) !important;
         }
 
-        /* Hero Visual Section */
         .hero-banner {
             height: 100vh;
-            background: linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('다운로드 (2)_2.jpg') no-repeat center center/cover;
+            background: linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('다운로드 (2).jpg') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -128,7 +114,6 @@
             font-weight: 300;
             text-transform: uppercase;
             margin-bottom: 12px;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.15);
         }
 
         .hero-banner p {
@@ -136,17 +121,14 @@
             text-transform: uppercase;
             letter-spacing: 0.4em;
             color: var(--shilla-bg);
-            text-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        /* Container & Grid Setup */
         .shilla-container {
             max-width: 1260px;
             margin: 0 auto;
             padding: 0 30px;
         }
 
-        /* Overview Section */
         .overview-wrap {
             text-align: center;
             padding: 120px 0;
@@ -168,8 +150,6 @@
             font-size: 34px;
             color: var(--shilla-brown);
             margin-bottom: 35px;
-            font-weight: 400;
-            letter-spacing: 0.02em;
         }
 
         .desc-paragraph {
@@ -180,7 +160,6 @@
             word-break: keep-all;
         }
 
-        /* Line Accent */
         .shilla-line {
             width: 40px;
             height: 1px;
@@ -188,7 +167,6 @@
             margin: 40px auto;
         }
 
-        /* Premium Gallery Showcase */
         .showcase-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -206,19 +184,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
         }
 
-        .grid-box:hover img {
-            transform: scale(1.03);
-        }
-
-        /* Grid Item Spans Configuration */
         .box-col-8 { grid-column: span 8; height: 500px; }
         .box-col-4 { grid-column: span 4; height: 500px; }
         .box-col-4-sm { grid-column: span 4; height: 320px; }
 
-        /* Feature Row Layout */
         .feature-row {
             display: flex;
             align-items: center;
@@ -253,7 +224,6 @@
             margin-bottom: 20px;
         }
 
-        /* Accommodation & Package Section */
         .accommodation-section {
             padding: 120px 0;
             border-top: 1px solid var(--border-line);
@@ -271,11 +241,6 @@
             border: 1px solid rgba(43, 37, 35, 0.05);
             border-radius: 2px;
             overflow: hidden;
-            transition: box-shadow 0.3s;
-        }
-
-        .package-card:hover {
-            box-shadow: 0 15px 40px rgba(43, 37, 35, 0.06);
         }
 
         .package-img {
@@ -329,7 +294,6 @@
             background-color: var(--shilla-gold);
         }
 
-        /* Inner Landscape Grid */
         .landscape-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -337,7 +301,6 @@
             margin: 40px 0 100px 0;
         }
 
-        /* Hotel Spec Bar */
         .hotel-spec-bar {
             background-color: var(--shilla-brown);
             color: var(--shilla-bg);
@@ -354,7 +317,6 @@
             font-weight: 300;
             color: var(--white);
             margin-bottom: 8px;
-            letter-spacing: 0.05em;
         }
 
         .spec-num-label {
@@ -364,7 +326,6 @@
             color: var(--shilla-gold);
         }
 
-        /* Call To Action Box */
         .cta-box {
             text-align: center;
             background-color: var(--white);
@@ -390,15 +351,13 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             margin-top: 30px;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.3s;
         }
 
         .shilla-btn:hover {
             background-color: var(--shilla-gold);
-            transform: translateY(-2px);
         }
 
-        /* Hotel Footer Style */
         footer {
             background-color: #1E1A19;
             color: #999999;
@@ -420,42 +379,30 @@
             font-size: 16px;
             color: var(--white);
             margin-bottom: 20px;
-            font-weight: 400;
             letter-spacing: 0.15em;
         }
 
         .footer-left p {
             margin-bottom: 8px;
-            color: #888888;
         }
 
         .footer-right {
             text-align: right;
         }
 
-        .footer-right p {
-            color: #666666;
-            margin-bottom: 6px;
-        }
-
-        /* Responsive UI Optimization */
         @media (max-width: 1024px) {
             header { padding: 20px 30px; }
-            nav a { margin-right: 25px; }
-            .showcase-grid { grid-template-columns: 1fr; }
+            nav { display: none; }
+            .showcase-grid, .landscape-grid { grid-template-columns: 1fr; }
             .grid-box { grid-column: span 12 !important; height: 350px !important; }
-            .feature-row { flex-direction: column !important; gap: 40px; padding: 60px 0; }
+            .feature-row { flex-direction: column !important; gap: 40px; }
             .feature-img-side { width: 100%; height: 350px; }
             .room-package-grid { grid-template-columns: 1fr; }
-            .landscape-grid { grid-template-columns: 1fr; gap: 15px; margin-bottom: 60px; }
-            .footer-content { flex-direction: column; gap: 40px; }
-            .footer-right { text-align: left; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hotel Header Navigation -->
     <header>
         <div class="brand-logo">
             <a href="#" class="shilla-serif">soha stay</a>
@@ -469,7 +416,6 @@
         </nav>
     </header>
 
-    <!-- Hero Visual Area -->
     <section class="hero-banner">
         <h1 class="shilla-serif">soha stay</h1>
         <p>The Thermal Spa & Private Resort</p>
@@ -477,35 +423,32 @@
 
     <div class="shilla-container">
         
-        <!-- Brand Story Section -->
         <section id="brand-story" class="overview-wrap">
             <span class="sub-title-tag">The Architecture of Relaxation</span>
             <h2 class="main-title shilla-serif">정제된 휴식, 완벽한 프라이버시의 완성</h2>
-            <p class="desc-paragraph">제주 서귀포 성산읍 오조리의 아늑한 자연경관 위에 정교하게 자리 잡은 소하스테이는 타협하지 않는 최고급 독채 휴양 환경을 선사합니다.</p>
-            <p class="desc-paragraph">단정한 붉은 벽돌의 외관과 현무암 돌담의 조화는 리조트에 들어선 순간부터 도심의 소음을 완전히 차단하며, 오직 귀하만을 위해 흐르는 고요한 온천 공간으로 안내합니다.</p>
+            <p class="desc-paragraph">제주 서귀포 성산읍 오조리의 아름다운 자연경관 위에 정교하게 자리 잡은 소하스테이는 대가족과 소중한 동반자를 위한 프리미엄 독채 휴양 환경을 선사합니다.</p>
+            <p class="desc-paragraph">단정한 붉은 벽돌의 외관과 현무암 돌담의 조화는 리조트에 들어선 순간부터 도심의 소음을 완전히 차단하며, 오직 우리만을 위해 흐르는 고요한 온천 공간으로 안내합니다.</p>
             <div class="shilla-line"></div>
         </section>
 
-        <!-- Premium Gallery Showcase -->
         <section class="showcase-grid">
             <div class="grid-box box-col-8">
-                <img src="다운로드 (6)_2.jpg" alt="소하스테이 독채 동 sunset 외관">
+                <img src="다운로드 (6).jpg" alt="소하스테이 독채 동 노을 외관">
             </div>
             <div class="grid-box box-col-4">
-                <img src="다운로드_2.jpeg" alt="소하스테이 주차장 및 건물 정면">
+                <img src="다운로드.jpeg" alt="소하스테이 건물 정면">
             </div>
             <div class="grid-box box-col-4">
-                <img src="다운로드 (4)_2.jpg" alt="소하스테이 붉은 벽돌 발코니 테라스 외형">
+                <img src="다운로드 (4).jpg" alt="소하스테이 발코니 테라스">
             </div>
             <div class="grid-box box-col-8">
-                <img src="다운로드 (7)_2.jpeg" alt="소하스테이 대형 TV와 화이트톤 거실 라운지">
+                <img src="다운로드 (7).jpeg" alt="소하스테이 거실 라운지">
             </div>
         </section>
 
-        <!-- Feature Highlight 1: The Thermal Spa -->
         <section id="spa-landscape" class="feature-row">
             <div class="feature-img-side">
-                <img src="다운로드 (8)_2.jpg" alt="소하스테이 패턴 타일 개별 수영장 및 온천 자쿠지탕">
+                <img src="다운로드 (8).jpg" alt="개별 수영장 및 온천 자쿠지">
             </div>
             <div class="feature-text-side">
                 <span class="sub-title-tag">Signature Experience</span>
@@ -514,10 +457,9 @@
             </div>
         </section>
 
-        <!-- Feature Highlight 2: Framed Sunrise View -->
         <section class="feature-row reverse">
             <div class="feature-img-side">
-                <img src="다운로드 (3)_2.jpg" alt="소하스테이 거실 가로형 와이드 윈도우 액자창 조망">
+                <img src="다운로드 (3).jpg" alt="성산일출봉 액자창 조망">
             </div>
             <div class="feature-text-side">
                 <span class="sub-title-tag">Architectural View</span>
@@ -526,7 +468,6 @@
             </div>
         </section>
 
-        <!-- Accommodation & Package Selection Section -->
         <section id="room-packages" class="accommodation-section">
             <div style="text-align: center; margin-bottom: 30px;">
                 <span class="sub-title-tag">Exclusive Room Packages</span>
@@ -535,9 +476,8 @@
 
             <div class="room-package-grid">
                 
-                <!-- Room Option A: Private Entertainment Suite (노래방) -->
                 <div class="package-card">
-                    <img class="package-img" src="다운로드 (7)_2.jpeg" alt="소하스테이 엔터테인먼트 전용 하이엔드 리빙 라운지">
+                    <img class="package-img" src="다운로드 (7).jpeg" alt="소하스테이 리빙 라운지">
                     <div class="package-body">
                         <span class="package-badge">Option 01 / Entertainment Suite</span>
                         <h4 class="package-title shilla-serif">프라이빗 노래방 완비 독채 객실</h4>
@@ -550,9 +490,8 @@
                     </div>
                 </div>
 
-                <!-- Room Option B: Relaxation Spa Suite -->
                 <div class="package-card">
-                    <img class="package-img" src="다운로드 (1)_2.jpeg" alt="소하스테이 럭셔리 트윈 베드룸 인테리어">
+                    <img class="package-img" src="다운로드 (1).jpeg" alt="소하스테이 베드룸">
                     <div class="package-body">
                         <span class="package-badge">Option 02 / Relaxation Spa Suite</span>
                         <h4 class="package-title shilla-serif">오가닉 테라피 릴랙싱 독채 객실</h4>
@@ -568,14 +507,12 @@
             </div>
         </section>
 
-        <!-- Sub Mini Gallery Grid -->
         <section class="landscape-grid">
-            <div class="grid-box box-col-4-sm"><img src="다운로드 (5)_2.jpeg" alt="소하스테이 침실 긴 가로창 조망 성산일출봉"></div>
-            <div class="grid-box box-col-4-sm"><img src="다운로드 (9)_2.jpg" alt="소하스테이 돌담 정원 두 그루의 이국적 야자수"></div>
-            <div class="grid-box box-col-4-sm"><img src="다운로드 (2)_2.jpg" alt="소하스테이 단지 전체 전경 뒤 우뚝 솟은 성산일출봉"></div>
+            <div class="grid-box box-col-4-sm"><img src="다운로드 (5).jpeg" alt="소하스테이 침실"></div>
+            <div class="grid-box box-col-4-sm"><img src="다운로드 (9).jpg" alt="소하스테이 정원 야자수"></div>
+            <div class="grid-box box-col-4-sm"><img src="다운로드 (2).jpg" alt="소하스테이 단지 전경"></div>
         </section>
 
-        <!-- Hotel Spec Summary Bar -->
         <section class="hotel-spec-bar">
             <div>
                 <div class="spec-num-title shilla-serif">3 BED SUITE</div>
@@ -591,7 +528,6 @@
             </div>
         </section>
 
-        <!-- Call To Action Area -->
         <section id="reservation" class="cta-box">
             <span class="sub-title-tag">Direct Booking Advantage</span>
             <h2 class="shilla-serif">soha stay : the thermal spa</h2>
@@ -601,18 +537,16 @@
 
     </div>
 
-    <!-- Hotel Style Footer Area -->
     <footer>
         <div class="footer-content">
             <div class="footer-left">
                 <h4 class="shilla-serif">SOHA STAY</h4>
                 <p>상호명: 소하스테이 독채펜션 | 대표자: 이미숙</p>
-                <p>사업장 주소: 대한민국 제주특별자치도 서귀포시 성산읍 오조로 8-12[cite: 1]</p>
-                <p>공식 브랜드 위탁운영 및 테크니컬 파트너: 디앤테크 (DN Tech)[cite: 1]</p>
+                <p>사업장 주소: 대한민국 제주특별자치도 서귀포시 성산읍 오조로 8-12</p>
+                <p>공식 브랜드 위탁운영 및 테크니컬 파트너: 디앤테크 (DN Tech)</p>
             </div>
             <div class="footer-right">
                 <p>© 2026 SOHA STAY. All Rights Reserved.</p>
-                <p style="font-size: 11px; color: #555555; margin-top: 10px;">The Shilla Stay Style Inspired Architecture Framework.</p>
             </div>
         </div>
     </footer>
