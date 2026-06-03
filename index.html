@@ -13,9 +13,9 @@
         }
         
         :root {
-            --shilla-brown: #2B2523;
-            --shilla-gold: #BC9C6C;
-            --shilla-bg: #F4F1EE;
+            --shilla-brown: #2B2523;      /* 신라스테이 특유의 도회적인 딥 브라운 */
+            --shilla-gold: #BC9C6C;       /* 세련되고 은은한 무드의 시그니처 골드 */
+            --shilla-bg: #F4F1EE;         /* 차분하고 고급스러운 오프화이트 배경 */
             --text-dark: #333333;
             --white: #ffffff;
             --border-line: rgba(43, 37, 35, 0.08);
@@ -30,11 +30,13 @@
             letter-spacing: -0.02em;
         }
 
+        /* Typography Customizing */
         .shilla-serif {
             font-family: 'Times New Roman', 'Didot', 'Cinzel', serif;
             letter-spacing: 0.15em;
         }
 
+        /* Header Navigation */
         header {
             position: fixed;
             top: 0;
@@ -48,6 +50,10 @@
             background: rgba(244, 241, 238, 0.92);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border-line);
+        }
+
+        .brand-logo {
+            text-align: left;
         }
 
         .brand-logo a {
@@ -67,6 +73,11 @@
             letter-spacing: 0.35em;
             display: block;
             margin-top: 2px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
         }
 
         nav a {
@@ -91,13 +102,16 @@
             font-weight: 600;
             letter-spacing: 0.15em;
             text-transform: uppercase;
+            margin-right: 0;
             transition: background-color 0.3s;
         }
 
         .btn-book-now:hover {
             background-color: var(--shilla-gold);
+            color: var(--white) !important;
         }
 
+        /* Hero Visual Section */
         .hero-banner {
             height: 100vh;
             background: linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('다운로드 (2).jpg') no-repeat center center/cover;
@@ -114,6 +128,7 @@
             font-weight: 300;
             text-transform: uppercase;
             margin-bottom: 12px;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.15);
         }
 
         .hero-banner p {
@@ -121,14 +136,17 @@
             text-transform: uppercase;
             letter-spacing: 0.4em;
             color: var(--shilla-bg);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
+        /* Container & Grid Setup */
         .shilla-container {
             max-width: 1260px;
             margin: 0 auto;
             padding: 0 30px;
         }
 
+        /* Overview Section */
         .overview-wrap {
             text-align: center;
             padding: 120px 0;
@@ -150,6 +168,8 @@
             font-size: 34px;
             color: var(--shilla-brown);
             margin-bottom: 35px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
         }
 
         .desc-paragraph {
@@ -160,6 +180,7 @@
             word-break: keep-all;
         }
 
+        /* Line Accent */
         .shilla-line {
             width: 40px;
             height: 1px;
@@ -167,6 +188,7 @@
             margin: 40px auto;
         }
 
+        /* Premium Gallery Showcase */
         .showcase-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -184,12 +206,19 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
+        .grid-box:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Grid Item Spans Configuration */
         .box-col-8 { grid-column: span 8; height: 500px; }
         .box-col-4 { grid-column: span 4; height: 500px; }
         .box-col-4-sm { grid-column: span 4; height: 320px; }
 
+        /* Feature Row Layout */
         .feature-row {
             display: flex;
             align-items: center;
@@ -224,6 +253,7 @@
             margin-bottom: 20px;
         }
 
+        /* Accommodation & Package Section */
         .accommodation-section {
             padding: 120px 0;
             border-top: 1px solid var(--border-line);
@@ -241,6 +271,11 @@
             border: 1px solid rgba(43, 37, 35, 0.05);
             border-radius: 2px;
             overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .package-card:hover {
+            box-shadow: 0 15px 40px rgba(43, 37, 35, 0.06);
         }
 
         .package-img {
@@ -294,6 +329,7 @@
             background-color: var(--shilla-gold);
         }
 
+        /* Inner Landscape Grid */
         .landscape-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -301,6 +337,7 @@
             margin: 40px 0 100px 0;
         }
 
+        /* Hotel Spec Bar */
         .hotel-spec-bar {
             background-color: var(--shilla-brown);
             color: var(--shilla-bg);
@@ -317,6 +354,7 @@
             font-weight: 300;
             color: var(--white);
             margin-bottom: 8px;
+            letter-spacing: 0.05em;
         }
 
         .spec-num-label {
@@ -326,6 +364,7 @@
             color: var(--shilla-gold);
         }
 
+        /* Call To Action Box */
         .cta-box {
             text-align: center;
             background-color: var(--white);
@@ -358,6 +397,7 @@
             background-color: var(--shilla-gold);
         }
 
+        /* Hotel Footer Style */
         footer {
             background-color: #1E1A19;
             color: #999999;
@@ -379,25 +419,36 @@
             font-size: 16px;
             color: var(--white);
             margin-bottom: 20px;
+            font-weight: 400;
             letter-spacing: 0.15em;
         }
 
         .footer-left p {
             margin-bottom: 8px;
+            color: #888888;
         }
 
         .footer-right {
             text-align: right;
         }
 
+        .footer-right p {
+            color: #666666;
+            margin-bottom: 6px;
+        }
+
+        /* Responsive UI Optimization */
         @media (max-width: 1024px) {
             header { padding: 20px 30px; }
             nav { display: none; }
-            .showcase-grid, .landscape-grid { grid-template-columns: 1fr; }
+            .showcase-grid { grid-template-columns: 1fr; }
             .grid-box { grid-column: span 12 !important; height: 350px !important; }
-            .feature-row { flex-direction: column !important; gap: 40px; }
+            .feature-row { flex-direction: column !important; gap: 40px; padding: 60px 0; }
             .feature-img-side { width: 100%; height: 350px; }
             .room-package-grid { grid-template-columns: 1fr; }
+            .landscape-grid { grid-template-columns: 1fr; gap: 15px; margin-bottom: 60px; }
+            .footer-content { flex-direction: column; gap: 40px; }
+            .footer-right { text-align: left; }
         }
     </style>
 </head>
