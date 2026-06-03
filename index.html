@@ -114,13 +114,18 @@
         /* Hero Visual Section */
         .hero-banner {
             height: 100vh;
-            background: linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('다운로드 (2).jpg') no-repeat center center/cover;
+            background: linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('./다운로드 (2).jpg') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: var(--white);
+        }
+
+        /* 만약 괄호 버전 파일명이 없을 때를 대비한 한글 백업 파일명 처리 */
+        .hero-banner {
+            background-image: linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('./다운로드 (2).jpg'), url('./소하스테이 단지 전체 전경 뒤 우뚝 솟은 성산일출봉.jpg');
         }
 
         .hero-banner h1 {
@@ -200,6 +205,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 2px;
+            background-color: #ECEAE5;
         }
 
         .grid-box img {
@@ -234,6 +240,7 @@
         .feature-img-side {
             flex: 1.2;
             height: 520px;
+            background-color: #ECEAE5;
         }
 
         .feature-img-side img {
@@ -282,6 +289,7 @@
             width: 100%;
             height: 380px;
             object-fit: cover;
+            background-color: #ECEAE5;
         }
 
         .package-body {
@@ -454,6 +462,7 @@
 </head>
 <body>
 
+    <!-- Hotel Header Navigation -->
     <header>
         <div class="brand-logo">
             <a href="#" class="shilla-serif">soha stay</a>
@@ -467,6 +476,7 @@
         </nav>
     </header>
 
+    <!-- Hero Visual Area -->
     <section class="hero-banner">
         <h1 class="shilla-serif">soha stay</h1>
         <p>The Thermal Spa & Private Resort</p>
@@ -474,6 +484,7 @@
 
     <div class="shilla-container">
         
+        <!-- Brand Story Section -->
         <section id="brand-story" class="overview-wrap">
             <span class="sub-title-tag">The Architecture of Relaxation</span>
             <h2 class="main-title shilla-serif">정제된 휴식, 완벽한 프라이버시의 완성</h2>
@@ -482,24 +493,26 @@
             <div class="shilla-line"></div>
         </section>
 
+        <!-- Premium Gallery Showcase -->
         <section class="showcase-grid">
             <div class="grid-box box-col-8">
-                <img src="다운로드 (6).jpg" alt="소하스테이 독채 동 노을 외관">
+                <img src="./다운로드 (6).jpg" onerror="this.src='./소하스테이 독채 동 노을 외관.jpg'" alt="소하스테이 독채 동 노을 외관">
             </div>
             <div class="grid-box box-col-4">
-                <img src="다운로드.jpeg" alt="소하스테이 건물 정면">
+                <img src="./다운로드.jpeg" onerror="this.src='./소하스테이 주차장 및 건물 정면.jpeg'" alt="소하스테이 건물 정면">
             </div>
             <div class="grid-box box-col-4">
-                <img src="다운로드 (4).jpg" alt="소하스테이 발코니 테라스">
+                <img src="./다운로드 (4).jpg" onerror="this.src='./소하스테이 붉은 벽돌 발코니 테라스 외형.jpg'" alt="소하스테이 발코니 테라스">
             </div>
             <div class="grid-box box-col-8">
-                <img src="다운로드 (7).jpeg" alt="소하스테이 거실 라운지">
+                <img src="./다운로드 (7).jpeg" onerror="this.src='./소하스테이 대형 TV와 화이트톤 거실 라운지.jpeg'" alt="소하스테이 거실 라운지">
             </div>
         </section>
 
+        <!-- Feature Highlight 1: The Thermal Spa -->
         <section id="spa-landscape" class="feature-row">
             <div class="feature-img-side">
-                <img src="다운로드 (8).jpg" alt="개별 수영장 및 온천 자쿠지">
+                <img src="./다운로드 (8).jpg" onerror="this.src='./소하스테이 패턴 타일 개별 수영장 및 온천 자쿠지탕.jpg'" alt="개별 수영장 및 온천 자쿠지">
             </div>
             <div class="feature-text-side">
                 <span class="sub-title-tag">Signature Experience</span>
@@ -508,9 +521,10 @@
             </div>
         </section>
 
+        <!-- Feature Highlight 2: Framed Sunrise View -->
         <section class="feature-row reverse">
             <div class="feature-img-side">
-                <img src="다운로드 (3).jpg" alt="성산일출봉 액자창 조망">
+                <img src="./다운로드 (3).jpg" onerror="this.src='./소하스테이 거실 가로형 와이드 윈도우 액자창 조망.jpg'" alt="성산일출봉 액자창 조망">
             </div>
             <div class="feature-text-side">
                 <span class="sub-title-tag">Architectural View</span>
@@ -519,6 +533,7 @@
             </div>
         </section>
 
+        <!-- Accommodation & Package Selection Section -->
         <section id="room-packages" class="accommodation-section">
             <div style="text-align: center; margin-bottom: 30px;">
                 <span class="sub-title-tag">Exclusive Room Packages</span>
@@ -528,7 +543,7 @@
             <div class="room-package-grid">
                 
                 <div class="package-card">
-                    <img class="package-img" src="다운로드 (7).jpeg" alt="소하스테이 리빙 라운지">
+                    <img class="package-img" src="./다운로드 (7).jpeg" onerror="this.src='./소하스테이 엔터테인먼트 전용 하이엔드 리빙 라운지.jpeg'" alt="소하스테이 리빙 라운지">
                     <div class="package-body">
                         <span class="package-badge">Option 01 / Entertainment Suite</span>
                         <h4 class="package-title shilla-serif">프라이빗 노래방 완비 독채 객실</h4>
@@ -542,7 +557,7 @@
                 </div>
 
                 <div class="package-card">
-                    <img class="package-img" src="다운로드 (1).jpeg" alt="소하스테이 베드룸">
+                    <img class="package-img" src="./다운로드 (1).jpeg" onerror="this.src='./소하스테이 럭셔리 트윈 베드룸 인테리어.jpeg'" alt="소하스테이 베드룸">
                     <div class="package-body">
                         <span class="package-badge">Option 02 / Relaxation Spa Suite</span>
                         <h4 class="package-title shilla-serif">오가닉 테라피 릴랙싱 독채 객실</h4>
@@ -559,9 +574,15 @@
         </section>
 
         <section class="landscape-grid">
-            <div class="grid-box box-col-4-sm"><img src="다운로드 (5).jpeg" alt="소하스테이 침실"></div>
-            <div class="grid-box box-col-4-sm"><img src="다운로드 (9).jpg" alt="소하스테이 정원 야자수"></div>
-            <div class="grid-box box-col-4-sm"><img src="다운로드 (2).jpg" alt="소하스테이 단지 전경"></div>
+            <div class="grid-box box-col-4-sm">
+                <img src="./다운로드 (5).jpeg" onerror="this.src='./소하스테이 침실 긴 가로창 조망 성산일출봉.jpeg'" alt="소하스테이 침실">
+            </div>
+            <div class="grid-box box-col-4-sm">
+                <img src="./다운로드 (9).jpg" onerror="this.src='./소하스테이 돌담 정원 두 그루의 이국적 야자수.jpg'" alt="소하스테이 정원 야자수">
+            </div>
+            <div class="grid-box box-col-4-sm">
+                <img src="./다운로드 (2).jpg" onerror="this.src='./소하스테이 단지 전체 전경 뒤 우뚝 솟은 성산일출봉.jpg'" alt="소하스테이 단지 전경">
+            </div>
         </section>
 
         <section class="hotel-spec-bar">
@@ -592,9 +613,9 @@
         <div class="footer-content">
             <div class="footer-left">
                 <h4 class="shilla-serif">SOHA STAY</h4>
-                <p>상호명: 소하스테이 독채펜션 | 대표자: 이미숙</p>
-                <p>사업장 주소: 대한민국 제주특별자치도 서귀포시 성산읍 오조로 8-12</p>
-                <p>공식 브랜드 위탁운영 및 테크니컬 파트너: 디앤테크 (DN Tech)</p>
+                <p>상호명: 소하스테이 독채펜션 | 대표자: 이미숙[cite: 1]</p>
+                <p>사업장 주소: 대한민국 제주특별자치도 서귀포시 성산읍 오조로 8-12[cite: 1]</p>
+                <p>공식 브랜드 위탁운영 및 테크니컬 파트너: 디앤테크 (DN Tech)[cite: 1]</p>
             </div>
             <div class="footer-right">
                 <p>© 2026 SOHA STAY. All Rights Reserved.</p>
