@@ -114,7 +114,7 @@
         /* Hero Visual Section */
         .hero-banner {
             height: 100vh;
-            background: linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('./다운로드 (2).JPG') no-repeat center center/cover;
+            background: linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -454,19 +454,6 @@
             .footer-right { text-align: left; }
         }
     </style>
-    <script>
-        // 대소문자 확장자 및 한글 백업 파일명을 순차적으로 체크해서 강제로 이미지를 꽂아넣는 호텔 시스템용 스크립트
-        function fixImage(img, primarySrc, secondarySrc, fallbackSrc) {
-            var count = 0;
-            img.onerror = function() {
-                count++;
-                if(count === 1) { img.src = primarySrc; }
-                else if(count === 2) { img.src = secondarySrc; }
-                else if(count === 3) { img.src = fallbackSrc; }
-                else { img.onerror = null; }
-            };
-        }
-    </script>
 </head>
 <body>
 
@@ -483,23 +470,10 @@
         </nav>
     </header>
 
-    <section class="hero-banner" id="heroSec">
+    <section class="hero-banner">
         <h1 class="shilla-serif">soha stay</h1>
         <p>The Thermal Spa & Private Resort</p>
     </section>
-    <script>
-        // 메ين 배경화면 대소문자 강제 스위칭 장치
-        var hero = document.getElementById('heroSec');
-        var testImg = new Image();
-        testImg.src = './다운로드 (2).jpg';
-        testImg.onerror = function() {
-            testImg.src = './다운로드 (2).JPG';
-            testImg.onerror = function() {
-                hero.style.backgroundImage = "linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('./소하스테이 단지 전체 전경 뒤 우뚝 솟은 성산일출봉.jpg')";
-            };
-            hero.style.backgroundImage = "linear-gradient(rgba(43, 37, 35, 0.15), rgba(43, 37, 35, 0.25)), url('./다운로드 (2).JPG')";
-        };
-    </script>
 
     <div class="shilla-container">
         
@@ -513,27 +487,22 @@
 
         <section class="showcase-grid">
             <div class="grid-box box-col-8">
-                <img src="./다운로드 (6).jpg" id="img6" alt="소하스테이 독채 동 노을 외관">
-                <script>fixImage(document.getElementById('img6'), './다운로드 (6).JPG', './소하스테이 독채 동 노을 외관.jpg', '');</script>
+                <img src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3%20(6).jpg" alt="소하스테이 독채 동 노을 외관">
             </div>
             <div class="grid-box box-col-4">
-                <img src="./다운로드.jpeg" id="img0" alt="소하스테이 건물 정면">
-                <script>fixImage(document.getElementById('img0'), './다운로드.JPEG', './소하스테이 주차장 및 건물 정면.jpeg', '');</script>
+                <img src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3.jpeg" alt="소하스테이 건물 정면">
             </div>
             <div class="grid-box box-col-4">
-                <img src="./다운로드 (4).jpg" id="img4" alt="소하스테이 발코니 테라스">
-                <script>fixImage(document.getElementById('img4'), './다운로드 (4).JPG', './소하스테이 붉은 벽돌 발코니 테라스 외형.jpg', '');</script>
+                <img src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3%20(4).jpg" alt="소하스테이 발코니 테라스">
             </div>
             <div class="grid-box box-col-8">
-                <img src="./다운로드 (7).jpeg" id="img7" alt="소하스테이 거실 라운지">
-                <script>fixImage(document.getElementById('img7'), './다운로드 (7).JPEG', './소하스테이 대형 TV와 화이트톤 거실 라운지.jpeg', '');</script>
+                <img src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3%20(7).jpeg" alt="소하스테이 거실 라운지">
             </div>
         </section>
 
         <section id="spa-landscape" class="feature-row">
             <div class="feature-img-side">
-                <img src="./다운로드 (8).jpg" id="img8" alt="개별 수영장 및 온천 자쿠지">
-                <script>fixImage(document.getElementById('img8'), './다운로드 (8).JPG', './소하스테이 패턴 타일 개별 수영장 및 온천 자쿠지탕.jpg', '');</script>
+                <img src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3%20(8).jpg" alt="개별 수영장 및 온천 자쿠지">
             </div>
             <div class="feature-text-side">
                 <span class="sub-title-tag">Signature Experience</span>
@@ -544,8 +513,7 @@
 
         <section class="feature-row reverse">
             <div class="feature-img-side">
-                <img src="./다운로드 (3).jpg" id="img3" alt="성산일출봉 액자창 조망">
-                <script>fixImage(document.getElementById('img3'), './다운로드 (3).JPG', './소하스테이 거실 가로형 와이드 윈도우 액자창 조망.jpg', '');</script>
+                <img src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3%20(3).jpg" alt="성산일출봉 액자창 조망">
             </div>
             <div class="feature-text-side">
                 <span class="sub-title-tag">Architectural View</span>
@@ -563,8 +531,7 @@
             <div class="room-package-grid">
                 
                 <div class="package-card">
-                    <img class="package-img" src="./다운로드 (7).jpeg" id="img7_2" alt="소하스테이 리빙 라운지">
-                    <script>fixImage(document.getElementById('img7_2'), './다운로드 (7).JPEG', './소하스테이 엔터테인먼트 전용 하이엔드 리빙 라운지.jpeg', '');</script>
+                    <img class="package-img" src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3%20(7).jpeg" alt="소하스테이 리빙 라운지">
                     <div class="package-body">
                         <span class="package-badge">Option 01 / Entertainment Suite</span>
                         <h4 class="package-title shilla-serif">프라이빗 노래방 완비 독채 객실</h4>
@@ -578,8 +545,7 @@
                 </div>
 
                 <div class="package-card">
-                    <img class="package-img" src="./다운로드 (1).jpeg" id="img1" alt="소하스테이 베드룸">
-                    <script>fixImage(document.getElementById('img1'), './다운로드 (1).JPEG', './소하스테이 럭셔리 트윈 베드룸 인테리어.jpeg', '');</script>
+                    <img class="package-img" src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3%20(1).jpeg" alt="소하스테이 베드룸">
                     <div class="package-body">
                         <span class="package-badge">Option 02 / Relaxation Spa Suite</span>
                         <h4 class="package-title shilla-serif">오가닉 테라피 릴랙싱 독채 객실</h4>
@@ -596,18 +562,9 @@
         </section>
 
         <section class="landscape-grid">
-            <div class="grid-box box-col-4-sm">
-                <img src="./다운로드 (5).jpeg" id="img5" alt="소하스테이 침실">
-                <script>fixImage(document.getElementById('img5'), './다운로드 (5).JPEG', './소하스테이 침실 긴 가로창 조망 성산일출봉.jpeg', '');</script>
-            </div>
-            <div class="grid-box box-col-4-sm">
-                <img src="./다운로드 (9).jpg" id="img9" alt="소하스테이 정원 야자수">
-                <script>fixImage(document.getElementById('img9'), './다운로드 (9).JPG', './소하스테이 돌담 정원 두 그루의 이국적 야자수.jpg', '');</script>
-            </div>
-            <div class="grid-box box-col-4-sm">
-                <img src="./다운로드 (2).jpg" id="img2" alt="소하스테이 단지 전경">
-                <script>fixImage(document.getElementById('img2'), './다운로드 (2).JPG', './소하스테이 단지 전체 전경 뒤 우뚝 솟은 성산일출봉.jpg', '');</script>
-            </div>
+            <div class="grid-box box-col-4-sm"><img src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3%20(5).jpeg" alt="소하스테이 침실"></div>
+            <div class="grid-box box-col-4-sm"><img src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3%20(9).jpg" alt="소하스테이 정원 야자수"></div>
+            <div class="grid-box box-col-4-sm"><img src="https://raw.githubusercontent.com/ottosang/sohatstay-web/main/%E1%84%83%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%85%E1%85%A9%E1%84%83%E1%85%B3%20(2).jpg" alt="소하스테이 단지 전경"></div>
         </section>
 
         <section class="hotel-spec-bar">
