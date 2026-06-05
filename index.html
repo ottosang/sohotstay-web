@@ -3,268 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>심리 테스트 RPG: 나의 부캐 찾기</title>
+    <title>전통 역학 & 주역 운세</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 레트로 게임 감성 스타일링 */
-        @import url('https://fonts.googleapis.com/css2?family=DungGeunMo&display=swap');
-
-        body {
-            font-family: 'DungGeunMo', 'Malgun Gothic', sans-serif;
-            background-color: #1a1a2e;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-
-        .game-container {
-            width: 400px;
-            height: 600px;
-            background-color: #16213e;
-            border: 4px solid #e94560;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        .screen {
-            width: 100%;
-            height: 100%;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .screen.active {
-            display: flex;
-        }
-
-        h1 { font-size: 24px; color: #e94560; margin-bottom: 10px; }
-        p { font-size: 16px; line-height: 1.5; color: #eee; }
-
-        /* 캐릭터 애니메이션 효과 */
-        .character {
-            font-size: 70px;
-            margin: 20px 0;
-            animation: bounce 0.6s infinite alternate;
-        }
-
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
-        }
-
-        .character.think {
-            animation: shake 0.5s infinite;
-        }
-
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(0px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-        }
-
-        /* 버튼 래퍼 및 스타일 */
-        .btn-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        button {
-            background-color: #0f3460;
-            color: white;
-            border: 2px solid #e94560;
-            padding: 15px;
-            font-size: 16px;
-            font-family: 'DungGeunMo', sans-serif;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.2s;
-        }
-
-        button:hover {
-            background-color: #e94560;
-            transform: scale(1.03);
-        }
-
-        /* 경험치 바 (프로그레스 바) */
-        .exp-bar-container {
-            width: 100%;
-            background-color: #0f3460;
-            border: 2px solid #e94560;
-            height: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .exp-bar {
-            width: 0%;
-            height: 100%;
-            background-color: #e94560;
-            transition: width 0.3s ease;
-        }
-
-        /* 결과 창 스탯 스타일 */
-        .stat-box {
-            background: #0f3460;
-            padding: 15px;
-            border-radius: 5px;
-            width: 90%;
-            font-size: 14px;
-            text-align: left;
-            border: 1px dashed #e94560;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap');
+        body { font-family: 'Noto Serif KR', serif; }
     </style>
 </head>
-<body>
+<body class="bg-amber-50 text-stone-900 min-h-screen flex flex-col items-center justify-center p-4">
 
-    <div class="game-container">
-        
-        <div id="intro-screen" class="screen active">
-            <h1>나의 부캐 찾기 RPG</h1>
-            <div class="character">🕹️</div>
-            <p>당신의 연령대를 선택하여<br>맞춤형 모험을 시작하세요!</p>
-            <div class="btn-container">
-                <button onclick="startGame('junior')">새싹 모험가 (청소년)</button>
-                <button onclick="startGame('adult')">프로 모험가 (성인)</button>
+    <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl border border-amber-100 p-6 md:p-8">
+        <h1 class="text-3xl font-bold text-center text-amber-800 mb-2">☯️ 명리 & 주역 운세</h1>
+        <p class="text-center text-sm text-stone-500 mb-8">당신의 타고난 기운과 오늘의 하늘의 뜻을 읽어드립니다.</p>
+
+        <form id="fortuneForm" class="space-y-5">
+            <div>
+                <label class="block text-sm font-semibold mb-1">이름 (한자 또는 한글)</label>
+                <input type="text" id="userName" required placeholder="예: 洪吉童 또는 홍길동" 
+                       class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600">
             </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold mb-1">성별</label>
+                    <select id="userGender" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600">
+                        <option value="남">남성</option>
+                        <option value="여">여성</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">음양력</label>
+                    <select id="calendarType" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600">
+                        <option value="양">양력</option>
+                        <option value="음">음력 (평달)</option>
+                        <option value="윤">음력 (윤달)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold mb-1">생년월일</label>
+                    <input type="date" id="birthDate" required 
+                           class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">태어난 시간 (시)</label>
+                    <select id="birthTime" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600">
+                        <option value="자">자시 (23시~01시)</option>
+                        <option value="축">축시 (01시~03시)</option>
+                        <option value="인">인시 (03시~05시)</option>
+                        <option value="묘">묘시 (05시~07시)</option>
+                        <option value="진">진시 (07시~09시)</option>
+                        <option value="사">사시 (09시~11시)</option>
+                        <option value="오">오시 (11시~13시)</option>
+                        <option value="미">미시 (13시~15시)</option>
+                        <option value="신">신시 (15시~17시)</option>
+                        <option value="유">유시 (17시~19시)</option>
+                        <option value="술">술시 (19시~21시)</option>
+                        <option value="해">해시 (21시~23시)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-amber-800 hover:bg-amber-900 text-white font-bold py-3 rounded-lg transition duration-200 shadow-md">
+                천기누설 운세 보기
+            </button>
+        </form>
+
+        <div id="resultSection" class="hidden mt-8 border-t-2 border-dashed border-amber-200 pt-6 space-y-6">
+            <h2 class="text-2xl font-bold text-center text-amber-900"><span id="resName"></span>님의 명리 분석</h2>
+            
+            <div class="p-4 bg-amber-50 rounded-xl">
+                <h3 class="font-bold text-amber-800 mb-2">🔮 타고난 성향 (오행 기운)</h3>
+                <p id="sajuAnalysis" class="text-stone-700 leading-relaxed text-sm"></p>
+            </div>
+
+            <div class="p-4 bg-stone-50 rounded-xl border border-stone-200">
+                <h3 class="font-bold text-stone-800 mb-1">☯️ 오늘의 주역 괘 풀이</h3>
+                <div id="juyeokGwae" class="text-xl font-bold text-amber-700 my-1"></div>
+                <p id="juyeokAnalysis" class="text-stone-700 leading-relaxed text-sm"></p>
+            </div>
+
+            <div class="p-4 bg-amber-900 text-white rounded-xl text-center">
+                <h3 class="font-bold text-amber-200 mb-3">🍀 오늘 오행의 기운을 담은 추천 로또 번호</h3>
+                <div id="lottoNumbers" class="flex justify-center gap-2 font-bold text-lg">
+                    </div>
+                <p class="text-xs text-amber-300/80 mt-2">※ 본인의 사주 상 길한 숫자를 조합하여 보정한 번호입니다.</p>
+            </div>
+
+            <button onclick="resetForm()" class="w-full bg-stone-200 hover:bg-stone-300 text-stone-700 font-semibold py-2 rounded-lg text-sm transition">
+                다른 운세 보기
+            </button>
         </div>
-
-        <div id="game-screen" class="screen">
-            <div class="exp-bar-container">
-                <div id="exp-bar" class="exp-bar"></div>
-            </div>
-            <div id="char-avatar" class="character think">🤔</div>
-            <p id="question-text">질문 텍스트가 들어가는 곳</p>
-            <div class="btn-container">
-                <button id="ans-a" onclick="selectAnswer('A')">선택지 A</button>
-                <button id="ans-b" onclick="selectAnswer('B')">선택지 B</button>
-            </div>
-        </div>
-
-        <div id="result-screen" class="screen">
-            <h1>모험 완료! 당신의 부캐는?</h1>
-            <div id="result-emoji" class="character" style="animation: bounce 0.4s infinite alternate;">🧙‍♂️</div>
-            <h2 id="result-title" style="color: #e94560;">유형 이름</h2>
-            <div class="stat-box">
-                <p id="result-desc">유형 설명이 들어가는 곳</p>
-                <p id="result-item" style="color:#ffae42; font-weight:bold;"></p>
-            </div>
-            <div class="btn-container">
-                <button onclick="restartGame()">다시 모험 떠나기 🔁</button>
-            </div>
-        </div>
-
     </div>
 
     <script>
-        // --- 게임 데이터 구성 ---
-        const questions = {
-            junior: [
-                { q: "새 학기 첫날, 교실에 들어갔을 때 나의 행동은?", a: "짝꿍에게 먼저 말을 걸며 통성명을 한다", b: "조용히 빈자리에 앉아 분위기를 살핀다", type: "EI" },
-                { q: "선생님이 전설의 보물섬 이야기를 해주신다면?", a: "보물섬에 갈 상상을 하며 가슴이 뛴다", b: "교과서 어디에 나오는 내용인지 확인한다", type: "SN" } // 예시를 위해 단순화(원래 N/S 축)
-            ],
-            adult: [
-                { q: "금요일 퇴근 길! 주말을 앞둔 당신의 선택은?", a: "친구들에게 연락해 당장 번개를 잡는다", b: "집으로 직행해 넷플릭스 켤 준비를 한다", type: "EI" },
-                { q: "친구가 갑자기 '나 너무 우울해서 빵 샀어' 라고 한다면?", a: "왜 우울해? 무슨 일 있었어? (토닥토닥)", b: "무슨 빵 샀는데? 맛있어?", type: "TF" }
-            ]
-        };
+        // 프론트엔드 시뮬레이션을 위한 데이터 셋트
+        const juyeokDb = [
+            { gwae: "䷊ 지천태(地天泰)", desc: "하늘과 땅의 기운이 화합하니 평화롭고 번창하는 시기입니다. 계획한 일이 있다면 과감하게 추진하세요." },
+            { gwae: "䷍ 화천대유(火天大有)", desc: "하늘 위에 해가 높이 떠 세상을 비추는 형상입니다. 큰 재물운과 명예가 따르니 주변과 베풀며 전진하십시오." },
+            { gwae: "䷎ 지산겸(地山謙)", desc: "높은 산이 땅 아래 엎드려 있는 형상으로, 스스로 낮출 때 가장 안전하고 이득이 큽니다. 겸손이 무기입니다." },
+            { gwae: "䷵ 뇌택귀매(雷澤歸妹)", desc: "순서가 뒤바뀌거나 마음이 앞서 실수를 할 수 있는 날입니다. 급하게 계약하거나 추진하지 말고 한 걸음 물러서세요." },
+            { gwae: "䷁ 중지곤(重地坤)", desc: "넓은 대지처럼 포용하고 수용하는 자세가 필요합니다. 주도하기보다는 타인의 뜻을 따르는 것이 이롭습니다." }
+        ];
 
-        const results = {
-            "E": { title: "에너지 폭발 마법사", emoji: "🧙‍♂️", desc: "사람들과 함께 있을 때 마나가 마르지 않는 활동가 유형입니다!", item: "추천 장비: 확성기 지팡이" },
-            "I": { title: "철벽 방어 은둔 기사", emoji: "🛡️", desc: "혼자만의 요새에서 에너지를 충전하는 내실 탄탄한 유형입니다!", item: "추천 장비: 쥐구멍 망토" }
-        };
+        const sajuTexts = [
+            "따뜻하고 열정적인 '화(火)'의 기운을 강하게 타고나셨습니다. 언변이 좋고 추진력이 뛰어나나, 가끔 성급해질 수 있으니 차분함을 유지하는 것이 좋습니다.",
+            "굳건하고 안정적인 '토(土)'의 기운이 중심을 잡고 있습니다. 신용을 중시하며 타인을 포용하는 능력이 뛰어납니다. 내실을 다지기에 좋은 사주입니다.",
+            "단단하고 결단력 있는 '금(金)'의 기운이 빛을 발합니다. 정의롭고 맺고 끊음이 확실하지만, 때로는 융통성을 발휘하는 것이 인간관계에 이롭습니다.",
+            "끊임없이 흐르고 지혜로운 '수(水)'의 기운을 담고 있습니다. 임기응변에 강하고 생각이 깊으나, 지나친 고민은 행동을 더디게 할 수 있으니 직관을 믿으세요.",
+            "생명력 있고 뻗어 나가는 '목(木)'의 기운이 지배적입니다. 기획력이 좋고 온정적이나, 자존심이 다치면 쉽게 꺾일 수 있으니 유연성을 기르는 것이 좋습니다."
+        ];
 
-        // --- 게임 상태 변수 ---
-        let currentAgeGroup = 'adult';
-        let currentIdx = 0;
-        let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0 };
+        // 오행별 추천 행운의 숫자 매핑
+        const luckyNumbersByElement = [
+            [2, 7, 12, 17, 22, 27, 32, 37, 42], // 화
+            [5, 10, 15, 20, 25, 30, 35, 40, 45], // 토
+            [4, 9, 14, 19, 24, 29, 34, 39, 44], // 금
+            [3, 8, 13, 18, 23, 28, 33, 38, 43], // 수
+            [1, 6, 11, 16, 21, 26, 31, 36, 41]  // 목
+        ];
 
-        // --- 게임 로직 제어 ---
-        function startGame(ageGroup) {
-            currentAgeGroup = ageGroup;
-            currentIdx = 0;
-            scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0 };
+        document.getElementById('fortuneForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value;
+            const birthDate = document.getElementById('birthDate').value;
             
-            switchScreen('intro-screen', 'game-screen');
-            showQuestion();
-        }
+            // 1. 단순 해시 메커니즘을 위한 숫자 변환 (이름 글자수 + 생일 조합)
+            // 실제 서비스에서는 여기에 만세력 계산 백엔드 API가 들어가야 합니다.
+            const seed = name.length + parseInt(birthDate.replace(/-/g, '')) || 777;
 
-        function showQuestion() {
-            const qList = questions[currentAgeGroup];
+            // 2. 사주 성향 결정 (Seed 기반 결정)
+            const sajuIndex = seed % sajuTexts.length;
+            document.getElementById('resName').innerText = name;
+            document.getElementById('sajuAnalysis').innerText = sajuTexts[sajuIndex];
+
+            // 3. 주역 괘 결정 (오늘 날짜 + Seed 조합으로 매일 바뀌게 설정)
+            const todayStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+            const juyeokIndex = (seed + parseInt(todayStr)) % juyeokDb.length;
+            document.getElementById('juyeokGwae').innerText = juyeokDb[juyeokIndex].gwae;
+            document.getElementById('juyeokAnalysis').innerText = juyeokDb[juyeokIndex].desc;
+
+            // 4. 오행 보정 로또 번호 생성
+            // 해당 사주 오행의 행운의 숫자 풀에서 2개를 고정 추출하고, 나머지는 1~45 중 랜덤 추출
+            const basePool = luckyNumbersByElement[sajuIndex];
+            let lottoResult = [];
             
-            // 경험치 바 업데이트
-            const progress = (currentIdx / qList.length) * 100;
-            document.getElementById('exp-bar').style.width = `${progress}%`;
-
-            if (currentIdx >= qList.length) {
-                showResult();
-                return;
+            // 행운의 숫자 풀에서 2개 무작위 선택
+            while(lottoResult.length < 2) {
+                let num = basePool[Math.floor(Math.random() * basePool.length)];
+                if(!lottoResult.includes(num)) lottoResult.push(num);
             }
 
-            const qData = qList[currentIdx];
-            document.getElementById('question-text').innerText = qData.q;
-            document.getElementById('ans-a').innerText = qData.a;
-            document.getElementById('ans-b').innerText = qData.b;
-            
-            // 질문 바뀔 때 캐릭터 에니메이션 변경 (고민 중...)
-            const char = document.getElementById('char-avatar');
-            char.innerText = "🤔";
-            char.className = "character think";
-        }
-
-        function selectAnswer(choice) {
-            const qData = questions[currentAgeGroup][currentIdx];
-            const typePair = qData.type; // 예: "EI"
-            
-            // 단순 구현을 위해 첫 질문의 A는 앞글자(E), B는 뒷글자(I)로 계산
-            if (choice === 'A') {
-                scores[typePair[0]]++;
-            } else {
-                scores[typePair[1]]++;
+            // 나머지 4개 번호 일반 추출 (중복 제거)
+            while(lottoResult.length < 6) {
+                let num = Math.floor(Math.random() * 45) + 1;
+                if(!lottoResult.includes(num)) lottoResult.push(num);
             }
 
-            currentIdx++;
-            showQuestion();
-        }
+            // 오름차순 정렬
+            lottoResult.sort((a, b) => a - b);
 
-        function showResult() {
-            switchScreen('game-screen', 'result-screen');
-            
-            // 가장 점수가 높은 지표로 임시 결과 산출 (E vs I 위주)
-            let finalType = scores.E >= scores.I ? "E" : "I";
-            const resultData = results[finalType];
+            // 로또 UI 렌더링
+            const lottoContainer = document.getElementById('lottoNumbers');
+            lottoContainer.innerHTML = '';
+            lottoResult.forEach(num => {
+                const ball = document.createElement('span');
+                ball.className = "w-10 h-10 flex items-center justify-center bg-amber-600 text-white font-bold rounded-full border-2 border-amber-400 shadow-sm";
+                // 로또 번호 대역별 색상 구분 효과 (선택사항)
+                if(num <= 10) ball.className += " bg-yellow-500 text-stone-900";
+                else if(num <= 20) ball.className += " bg-blue-600";
+                else if(num <= 30) ball.className += " bg-red-600";
+                else if(num <= 40) ball.className += " bg-gray-600";
+                else ball.className += " bg-green-600";
+                
+                ball.innerText = num;
+                lottoContainer.appendChild(ball);
+            });
 
-            document.getElementById('result-emoji').innerText = resultData.emoji;
-            document.getElementById('result-title').innerText = resultData.title;
-            document.getElementById('result-desc').innerText = resultData.desc;
-            document.getElementById('result-item').innerText = resultData.item;
-        }
+            // 화면 전환
+            document.getElementById('fortuneForm').classList.add('hidden');
+            document.getElementById('resultSection').classList.remove('hidden');
+        });
 
-        function restartGame() {
-            switchScreen('result-screen', 'intro-screen');
-        }
-
-        function switchScreen(hideId, showId) {
-            document.getElementById(hideId).classList.remove('active');
-            document.getElementById(showId).classList.add('active');
+        function resetForm() {
+            document.getElementById('fortuneForm').reset();
+            document.getElementById('fortuneForm').classList.remove('hidden');
+            document.getElementById('resultSection').classList.add('hidden');
         }
     </script>
 </body>
