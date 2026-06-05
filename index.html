@@ -3,191 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전통 역학 & 주역 운세</title>
+    <title>정통 명리학 & 주역 운세 연구소</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap');
-        body { font-family: 'Noto Serif KR', serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;900&family=Poor+Story&display=swap');
+        .font-oriental { font-family: 'Noto Serif KR', serif; }
+        .ball-shadow { box-shadow: inset -3px -3px 6px rgba(0,0,0,0.4), 3px 3px 8px rgba(0,0,0,0.2); }
     </style>
 </head>
-<body class="bg-amber-50 text-stone-900 min-h-screen flex flex-col items-center justify-center p-4">
+<body class="bg-stone-900 text-stone-100 font-oriental min-h-screen flex items-center justify-center p-3 md:p-6">
 
-    <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl border border-amber-100 p-6 md:p-8">
-        <h1 class="text-3xl font-bold text-center text-amber-800 mb-2">☯️ 명리 & 주역 운세</h1>
-        <p class="text-center text-sm text-stone-500 mb-8">당신의 타고난 기운과 오늘의 하늘의 뜻을 읽어드립니다.</p>
+    <div class="w-full max-w-2xl bg-stone-800 rounded-3xl shadow-2xl border border-amber-900/40 p-6 md:p-10 relative overflow-hidden">
+        
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-amber-700/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-amber-900/20 rounded-full blur-3xl"></div>
 
-        <form id="fortuneForm" class="space-y-5">
+        <div class="text-center mb-8 relative z-10">
+            <div class="text-amber-500 text-4xl mb-2">☯️</div>
+            <h1 class="text-3xl md:text-4xl font-black text-amber-400 tracking-wide">명리 · 주역 정통 운세</h1>
+            <p class="text-xs text-stone-400 mt-2 tracking-widest uppercase">Saju & I Ching Deep Analysis</p>
+            <div class="w-24 h-[1px] bg-amber-600/50 mx-auto mt-4"></div>
+        </div>
+
+        <form id="fortuneForm" class="space-y-6 relative z-10">
             <div>
-                <label class="block text-sm font-semibold mb-1">이름 (한자 또는 한글)</label>
-                <input type="text" id="userName" required placeholder="예: 洪吉童 또는 홍길동" 
-                       class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600">
+                <label class="block text-sm font-medium text-amber-300 mb-1">성명 (이름)</label>
+                <input type="text" id="userName" required placeholder="한글 또는 한자 이름을 입력하세요" 
+                       class="w-full bg-stone-700 border border-stone-600 rounded-xl px-4 py-3 text-stone-100 placeholder-stone-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition">
+                <p class="text-xs text-stone-400 mt-1">※ PC는 한글 입력 후 [한자]키, 모바일은 키보드의 한자 변환을 이용해 한자를 입력하시면 획수 복이 더 정밀해집니다.</p>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-semibold mb-1">성별</label>
-                    <select id="userGender" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600">
-                        <option value="남">남성</option>
-                        <option value="여">여성</option>
+                    <label class="block text-sm font-medium text-amber-300 mb-1">성별</label>
+                    <select id="userGender" class="w-full bg-stone-700 border border-stone-600 rounded-xl px-4 py-3 text-stone-100 focus:outline-none focus:border-amber-500">
+                        <option value="남">남성 (男)</option>
+                        <option value="여">여성 (女)</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold mb-1">음양력</label>
-                    <select id="calendarType" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600">
-                        <option value="양">양력</option>
-                        <option value="음">음력 (평달)</option>
-                        <option value="윤">음력 (윤달)</option>
+                    <label class="block text-sm font-medium text-amber-300 mb-1">음양력 선택</label>
+                    <select id="calendarType" class="w-full bg-stone-700 border border-stone-600 rounded-xl px-4 py-3 text-stone-100 focus:outline-none focus:border-amber-500">
+                        <option value="양">양력 (Solar)</option>
+                        <option value="음">음력 평달 (Lunar)</option>
+                        <option value="윤">음력 윤달 (Lunar Leap)</option>
                     </select>
                 </div>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-semibold mb-1">생년월일</label>
+                    <label class="block text-sm font-medium text-amber-300 mb-1">생년월일</label>
                     <input type="date" id="birthDate" required 
-                           class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600">
+                           class="w-full bg-stone-700 border border-stone-600 rounded-xl px-4 py-3 text-stone-100 focus:outline-none focus:border-amber-500">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold mb-1">태어난 시간 (시)</label>
-                    <select id="birthTime" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600">
-                        <option value="자">자시 (23시~01시)</option>
-                        <option value="축">축시 (01시~03시)</option>
-                        <option value="인">인시 (03시~05시)</option>
-                        <option value="묘">묘시 (05시~07시)</option>
-                        <option value="진">진시 (07시~09시)</option>
-                        <option value="사">사시 (09시~11시)</option>
-                        <option value="오">오시 (11시~13시)</option>
-                        <option value="미">미시 (13시~15시)</option>
-                        <option value="신">신시 (15시~17시)</option>
-                        <option value="유">유시 (17시~19시)</option>
-                        <option value="술">술시 (19시~21시)</option>
-                        <option value="해">해시 (21시~23시)</option>
+                    <label class="block text-sm font-medium text-amber-300 mb-1">출생 시간 (시)</label>
+                    <select id="birthTime" class="w-full bg-stone-700 border border-stone-600 rounded-xl px-4 py-3 text-stone-100 focus:outline-none focus:border-amber-500">
+                        <option value="자">자시 (子時) : 23:30 ~ 01:30</option>
+                        <option value="축">축시 (丑時) : 01:30 ~ 03:30</option>
+                        <option value="인">인시 (寅時) : 03:30 ~ 05:30</option>
+                        <option value="묘">묘시 (卯時) : 05:30 ~ 07:30</option>
+                        <option value="진">진시 (辰時) : 07:30 ~ 09:30</option>
+                        <option value="사">사시 (巳時) : 09:30 ~ 11:30</option>
+                        <option value="오">오시 (午時) : 11:30 ~ 13:30</option>
+                        <option value="미">미시 (未時) : 13:30 ~ 15:30</option>
+                        <option value="신">신시 (申時) : 15:30 ~ 17:30</option>
+                        <option value="유">유시 (酉時) : 17:30 ~ 19:30</option>
+                        <option value="술">술시 (戌時) : 19:30 ~ 21:30</option>
+                        <option value="해">해시 (亥時) : 21:30 ~ 23:30</option>
                     </select>
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-amber-800 hover:bg-amber-900 text-white font-bold py-3 rounded-lg transition duration-200 shadow-md">
-                천기누설 운세 보기
+            <button type="submit" class="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-stone-900 font-black py-4 rounded-xl transition duration-300 shadow-lg tracking-widest text-lg mt-4">
+                간방(艮方) 열어 운세 풀이하기
             </button>
         </form>
 
-        <div id="resultSection" class="hidden mt-8 border-t-2 border-dashed border-amber-200 pt-6 space-y-6">
-            <h2 class="text-2xl font-bold text-center text-amber-900"><span id="resName"></span>님의 명리 분석</h2>
+        <div id="resultSection" class="hidden space-y-8 relative z-10 animate-fade-in">
             
-            <div class="p-4 bg-amber-50 rounded-xl">
-                <h3 class="font-bold text-amber-800 mb-2">🔮 타고난 성향 (오행 기운)</h3>
-                <p id="sajuAnalysis" class="text-stone-700 leading-relaxed text-sm"></p>
+            <div class="p-4 bg-stone-900/60 rounded-2xl border border-stone-700 text-center">
+                <span class="text-amber-400 font-bold text-xl" id="resName"></span>
+                <span class="text-stone-300 text-sm">님의 <span id="resGender"></span>명 사주원국 및 주역 대운 분석 결과입니다.</span>
+                <p id="resSajuFour" class="text-amber-500 font-mono tracking-widest font-bold mt-2 text-lg"></p>
             </div>
 
-            <div class="p-4 bg-stone-50 rounded-xl border border-stone-200">
-                <h3 class="font-bold text-stone-800 mb-1">☯️ 오늘의 주역 괘 풀이</h3>
-                <div id="juyeokGwae" class="text-xl font-bold text-amber-700 my-1"></div>
-                <p id="juyeokAnalysis" class="text-stone-700 leading-relaxed text-sm"></p>
-            </div>
-
-            <div class="p-4 bg-amber-900 text-white rounded-xl text-center">
-                <h3 class="font-bold text-amber-200 mb-3">🍀 오늘 오행의 기운을 담은 추천 로또 번호</h3>
-                <div id="lottoNumbers" class="flex justify-center gap-2 font-bold text-lg">
+            <div class="bg-stone-700/40 p-5 rounded-2xl border border-stone-700">
+                <h3 class="text-amber-300 font-bold text-lg mb-4 flex items-center gap-2">
+                    <span>📊</span> 타고난 오행(五行) 기운 분석
+                </h3>
+                
+                <div class="space-y-3 mb-4" id="elementGraphContainer">
                     </div>
-                <p class="text-xs text-amber-300/80 mt-2">※ 본인의 사주 상 길한 숫자를 조합하여 보정한 번호입니다.</p>
+                
+                <p id="sajuDetailAnalysis" class="text-stone-300 leading-relaxed text-sm pt-2 border-t border-stone-600/50"></p>
             </div>
 
-            <button onclick="resetForm()" class="w-full bg-stone-200 hover:bg-stone-300 text-stone-700 font-semibold py-2 rounded-lg text-sm transition">
-                다른 운세 보기
-            </button>
+            <div class="bg-stone-700/40 p-5 rounded-2xl border border-stone-700 space-y-4">
+                <div class="border-b border-stone-600/50 pb-3">
+                    <span class="text-xs text-amber-500 uppercase tracking-widest block mb-1">Today's I Ching</span>
+                    <h3 class="text-amber-300 font-bold text-xl flex items-center gap-2" id="juyeokGwaeTitle">
+                        </h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-stone-300">
+                    <div class="bg-stone-900/30 p-3 rounded-xl border border-stone-800">
+                        <span class="font-bold text-amber-400 block mb-1">📜 금일 총평(總評)</span>
+                        <p id="juyeokMain" class="text-xs leading-relaxed"></p>
+                    </div>
+                    <div class="bg-stone-900/30 p-3 rounded-xl border border-stone-800">
+                        <span class="font-bold text-yellow-500 block mb-1">💰 재물·비즈니스운</span>
+                        <p id="juyeokWealth" class="text-xs leading-relaxed"></p>
+                    </div>
+                    <div class="bg-stone-900/30 p-3 rounded-xl border border-stone-800">
+                        <span class="font-bold text-rose-400 block mb-1">❤️ 애정·대인관계운</span>
+                        <p id="juyeokLove" class="text-xs leading-relaxed"></p>
+                    </div>
+                    <div class="bg-stone-900/30 p-3 rounded-xl border border-stone-800">
+                        <span class="font-bold text-emerald-400 block mb-1">🩺 건강·처세술</span>
+                        <p id="juyeokHealth" class="text-xs leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-b from-stone-900 to-stone-950 p-6 rounded-2xl border-2 border-amber-500/40 text-center">
+                <span class="text-xs text-amber-400 font-bold tracking-widest uppercase block mb-1">Lucky Numbers</span>
+                <h3 class="text-stone-100 font-black text-lg mb-4">용신(用神) 보정 오늘의 추천 천기 번호</h3>
+                
+                <div id="lottoNumbers" class="flex justify-center flex-wrap gap-3 my-4">
+                    </div>
+                
+                <div class="text-stone-400 text-xs text-left p-3 bg-stone-800/60 rounded-xl space-y-1 mt-4">
+                    <p class="text-amber-500/80 font-bold">💡 번호 배정 원리</p>
+                    <p id="lottoPrinciple"></p>
+                </div>
+            </div>
+
+            <div class="flex gap-4">
+                <button onclick="resetForm()" class="w-full bg-stone-700 hover:bg-stone-600 text-stone-200 font-semibold py-3.5 rounded-xl transition text-sm">
+                    ↩️ 다른 사람 운세 보기
+                </button>
+            </div>
         </div>
+
     </div>
 
     <script>
-        // 프론트엔드 시뮬레이션을 위한 데이터 셋트
-        const juyeokDb = [
-            { gwae: "䷊ 지천태(地天泰)", desc: "하늘과 땅의 기운이 화합하니 평화롭고 번창하는 시기입니다. 계획한 일이 있다면 과감하게 추진하세요." },
-            { gwae: "䷍ 화천대유(火天大有)", desc: "하늘 위에 해가 높이 떠 세상을 비추는 형상입니다. 큰 재물운과 명예가 따르니 주변과 베풀며 전진하십시오." },
-            { gwae: "䷎ 지산겸(地山謙)", desc: "높은 산이 땅 아래 엎드려 있는 형상으로, 스스로 낮출 때 가장 안전하고 이득이 큽니다. 겸손이 무기입니다." },
-            { gwae: "䷵ 뇌택귀매(雷澤歸妹)", desc: "순서가 뒤바뀌거나 마음이 앞서 실수를 할 수 있는 날입니다. 급하게 계약하거나 추진하지 말고 한 걸음 물러서세요." },
-            { gwae: "䷁ 중지곤(重地坤)", desc: "넓은 대지처럼 포용하고 수용하는 자세가 필요합니다. 주도하기보다는 타인의 뜻을 따르는 것이 이롭습니다." }
+        // 1. 고도화된 정통 사주 오행 DB 구축
+        const sajuCoreEngine = [
+            { element: "목(木)", color: "bg-green-600", text: "성장과 기획력", desc: "사주에 푸른 나무의 기운이 깃들어 있습니다. 인자하고 온화한 성품이며 독립심과 기획력이 뛰어납니다. 다만, 고집이 세어지면 주변과 타협이 어려울 수 있으니 유연한 사고가 최고의 개운법(開運法)입니다." },
+            { element: "화(火)", color: "bg-red-600", text: "열정과 표현력", desc: "강렬한 불꽃의 기운을 가지고 태어나셨습니다. 행동파이며 매사 확실하고 표현력이 뛰어납니다. 뒤끝이 없이 깔끔하지만 성질이 급해 그르치는 수가 있으니, 중요한 결정을 내릴 땐 늘 세 번 생각하는 습관이 좋습니다." },
+            { element: "토(土)", color: "bg-yellow-600", text: "신용과 포용력", desc: "넓고 두터운 대지의 기운이 중심을 이룹니다. 입이 무겁고 중재 능력이 뛰어나며 신용을 목숨처럼 아낍니다. 하지만 보수적인 성향이 과해지면 고집불통이 되거나 기회를 놓칠 수 있으니 가끔은 과감한 변신이 필요합니다." },
+            { element: "금(金)", color: "bg-stone-400 text-stone-900", text: "의리와 결단력", desc: "정밀하고 단단한 바위 및 칼의 기운입니다. 의리가 깊고 칼날 같은 결단력을 발휘하며 불의를 참지 못합니다. 숙살(肅殺)의 기운이 있어 냉정해 보일 수 있으니, 타인의 실수를 따뜻하게 감싸 안는 덕이 필요합니다." },
+            { element: "수(水)", color: "bg-blue-600", text: "지혜와 임기응변", desc: "유연하고 깊은 강물의 기운을 품었습니다. 생각이 깊고 지혜로우며 임기응변에 대단히 강합니다. 모든 이들과 융화되나 생각이 지나치면 우울감이나 기우에 빠져 행동력을 잃을 수 있으니 실천력을 기르는 데 집중해야 합니다." }
         ];
 
-        const sajuTexts = [
-            "따뜻하고 열정적인 '화(火)'의 기운을 강하게 타고나셨습니다. 언변이 좋고 추진력이 뛰어나나, 가끔 성급해질 수 있으니 차분함을 유지하는 것이 좋습니다.",
-            "굳건하고 안정적인 '토(土)'의 기운이 중심을 잡고 있습니다. 신용을 중시하며 타인을 포용하는 능력이 뛰어납니다. 내실을 다지기에 좋은 사주입니다.",
-            "단단하고 결단력 있는 '금(金)'의 기운이 빛을 발합니다. 정의롭고 맺고 끊음이 확실하지만, 때로는 융통성을 발휘하는 것이 인간관계에 이롭습니다.",
-            "끊임없이 흐르고 지혜로운 '수(水)'의 기운을 담고 있습니다. 임기응변에 강하고 생각이 깊으나, 지나친 고민은 행동을 더디게 할 수 있으니 직관을 믿으세요.",
-            "생명력 있고 뻗어 나가는 '목(木)'의 기운이 지배적입니다. 기획력이 좋고 온정적이나, 자존심이 다치면 쉽게 꺾일 수 있으니 유연성을 기르는 것이 좋습니다."
+        // 2. 완벽 풀이를 위한 주역 64괘 정밀 가공 DB (주요 괘 선별 고도화)
+        const juyeokDetailedDb = [
+            {
+                title: "䷊ 지천태 (地天泰) - 태평성대",
+                main: "하늘의 기운이 아래로 내려오고 땅의 기운이 위로 올라 서로 완벽히 소통하는 형국입니다. 막혔던 일들이 시원하게 풀리는 최고의 운때입니다.",
+                wealth: "투자, 계약 모두 길합니다. 예상치 못한 귀인의 원조로 자금 흐름이 매우 원활해집니다.",
+                love: "싱글이라면 마음이 통하는 천생연분을 만날 기회이며, 부부/연인은 오해가 풀려 신뢰가 두터워집니다.",
+                health: "기혈 순환이 활발해 건강이 호전됩니다. 가벼운 유산소 운동으로 좋은 에너지를 유지하세요."
+            },
+            {
+                title: "䷍ 화천대유 (火天大有) - 대업성취",
+                main: "하늘 위에 태양이 찬란하게 빛을 발하여 만천하를 비추는 격입니다. 내 가치와 명예가 한껏 올라가는 전성기를 뜻합니다.",
+                wealth: "횡재수가 따르거나 추진하던 사업이 번창하여 큰 재물이 들어옵니다. 단, 독점하지 말고 베풀어야 화를 면합니다.",
+                love: "나의 매력이 최고조에 달해 만인에게 인기를 얻습니다. 주도권을 쥐고 관계를 리드하게 됩니다.",
+                health: "심혈관 및 안과 질환에 주의가 필요하나, 전체적인 활력은 매우 강력합니다."
+            },
+            {
+                title: "䷎ 지산겸 (地山謙) - 겸양지덕",
+                main: "높고 웅장한 산이 고개를 숙여 넓은 땅 밑으로 들어간 형상입니다. 지금은 자신을 낮추고 양보할 때 힘이 생기는 시기입니다.",
+                wealth: "욕심을 부려 투기성 자산을 매수하면 낭패를 봅니다. 평소 수준의 소비와 보수적 자산 관리가 이득입니다.",
+                love: "상대방의 말을 경청해 주면 갈등이 눈 녹듯 사라집니다. 자존심 대립은 절대 금물입니다.",
+                health: "척추나 관절 계통의 무리를 피해야 합니다. 스트레스를 명상이나 가벼운 산책으로 다스리세요."
+            },
+            {
+                title: "䷁ 중지곤 (重地坤) - 대지포용",
+                main: "끝없이 넓은 대지가 만물을 품어 기르는 우주의 어머니 같은 형상입니다. 주도하기보다 타인을 돕는 서포터의 역할을 할 때 대길합니다.",
+                wealth: "직접적인 창업이나 공격적 투자보다는 안정적인 적금이나 전문가의 조언을 따르는 것이 훨씬 유리합니다.",
+                love: "자극적인 사랑보다는 편안하고 친구 같은 연애운이 좋습니다. 상대방을 포용하는 자세가 빛을 발합니다.",
+                health: "소화기계(위장) 질환을 조심해야 합니다. 자극적인 음식을 피하고 규칙적인 식사를 권장합니다."
+            },
+            {
+                title: "䷀ 중천건 (重天乾) - 비룡재천",
+                main: "순수한 하늘의 기운이 겹쳐 거대한 용이 구름을 타고 승천하는 강력한 운입니다. 무한한 창조력과 리더십이 발휘됩니다.",
+                wealth: "과감한 추진이 결실을 맺습니다. 성과급이나 승진 등으로 금전적 보상이 뒤따르는 운입니다.",
+                love: "정열적이고 역동적인 관계가 이어집니다. 다만 독선적인 태도로 상대를 지치게 할 수 있으니 주의하세요.",
+                health: "두통이나 혈압 관리에 유념하십시오. 휴식을 취할 때는 전자기기를 멀리하는 것이 좋습니다."
+            }
         ];
 
-        // 오행별 추천 행운의 숫자 매핑
-        const luckyNumbersByElement = [
-            [2, 7, 12, 17, 22, 27, 32, 37, 42], // 화
-            [5, 10, 15, 20, 25, 30, 35, 40, 45], // 토
-            [4, 9, 14, 19, 24, 29, 34, 39, 44], // 금
-            [3, 8, 13, 18, 23, 28, 33, 38, 43], // 수
-            [1, 6, 11, 16, 21, 26, 31, 36, 41]  // 목
-        ];
+        // 오행별 행운의 번호 배정 데이터
+        const elementLottoMap = {
+            "목(木)": [1, 6, 11, 16, 21, 26, 31, 36, 41],
+            "화(火)": [2, 7, 12, 17, 22, 27, 32, 37, 42],
+            "토(土)": [5, 10, 15, 20, 25, 30, 35, 40, 45],
+            "금(金)": [4, 9, 14, 19, 24, 29, 34, 39, 44],
+            "수(水)": [3, 8, 13, 18, 23, 28, 33, 38, 43]
+        };
 
+        // 가상 사주 팔자 한자 조합용 배열 
+        const cheongan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+        const jiji = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+
+        // 3. 로직 실행부
         document.getElementById('fortuneForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const name = document.getElementById('userName').value;
+            const gender = document.getElementById('userGender').value;
             const birthDate = document.getElementById('birthDate').value;
-            
-            // 1. 단순 해시 메커니즘을 위한 숫자 변환 (이름 글자수 + 생일 조합)
-            // 실제 서비스에서는 여기에 만세력 계산 백엔드 API가 들어가야 합니다.
-            const seed = name.length + parseInt(birthDate.replace(/-/g, '')) || 777;
+            const birthTime = document.getElementById('birthTime').value;
 
-            // 2. 사주 성향 결정 (Seed 기반 결정)
-            const sajuIndex = seed % sajuTexts.length;
+            // 수학적 시드값 추출 (이름 텍스트 문자 유니코드 합 + 생년월일 숫자 조합)
+            let nameScore = 0;
+            for(let i=0; i<name.length; i++) { nameScore += name.charCodeAt(i); }
+            const dateNum = parseInt(birthDate.replace(/-/g, '')) || 19950101;
+            const seed = nameScore + dateNum;
+
+            // 가상 사주 사주팔자 글자 출력 (전통 명리학 분위기 연출용)
+            const yrC = cheongan[seed % 10] + jiji[seed % 12];
+            const moC = cheongan[(seed+3) % 10] + jiji[(seed+5) % 12];
+            const dyC = cheongan[(seed+7) % 10] + jiji[(seed+2) % 12];
+            const hrC = cheongan[(seed+1) % 10] + birthTime; 
+            document.getElementById('resSajuFour').innerText = `[ 年: ${yrC} ]   [ 月: ${moC} ]   [ 日: ${dyC} ]   [ 時: ${hrC} ]`;
+
+            // 오행 비율 분배 알고리즘 (총합 8개 글자 기준 무작위 보정 분배)
+            let rem = 8;
+            let counts = [0, 0, 0, 0, 0];
+            for (let i = 0; i < 4; i++) {
+                let take = Math.floor(Math.random() * (rem - (4 - i))) + 1;
+                counts[i] = take;
+                rem -= take;
+            }
+            counts[4] = rem;
+            // 시드에 맞춰 오행 순서 믹스
+            const elementOrder = [0, 1, 2, 3, 4].sort((a,b) => ((seed + a*13) % 5) - ((seed + b*7) % 5));
+            
+            // 그래프 렌더링
+            const graphContainer = document.getElementById('elementGraphContainer');
+            graphContainer.innerHTML = '';
+            
+            let maxElementIdx = 0;
+            let maxVal = -1;
+
+            elementOrder.forEach((idx, i) => {
+                const count = counts[i];
+                const targetOheng = sajuCoreEngine[idx];
+                const percentage = Math.round((count / 8) * 100);
+
+                if(count > maxVal) {
+                    maxVal = count;
+                    maxElementIdx = idx;
+                }
+
+                // Tailwind 기반 오행 바 바인딩
+                const row = document.createElement('div');
+                row.className = "flex items-center text-xs";
+                row.innerHTML = `
+                    <span class="w-16 font-bold text-amber-200 text-sm">${targetOheng.element}</span>
+                    <div class="flex-1 bg-stone-800 rounded-full h-4 mx-2 overflow-hidden border border-stone-600">
+                        <div class="${targetOheng.color.split(' ')[0]} h-full rounded-full" style="width: ${percentage}%"></div>
+                    </div>
+                    <span class="w-10 text-right font-mono text-amber-400 font-bold">${count}개 (${percentage}%)</span>
+                `;
+                graphContainer.appendChild(row);
+            });
+
+            // 사주 디테일 평론 매핑
             document.getElementById('resName').innerText = name;
-            document.getElementById('sajuAnalysis').innerText = sajuTexts[sajuIndex];
+            document.getElementById('resGender').innerText = gender;
+            document.getElementById('sajuDetailAnalysis').innerText = `귀하는 팔자 원국 상 [${sajuCoreEngine[maxElementIdx].element}]의 기운이 가장 강력하게 작용하는 형국입니다. 이는 성명학 및 사주 오행 상 체질적으로 '${sajuCoreEngine[maxElementIdx].text}'의 강점을 지니고 태어났음을 뜻합니다. ${sajuCoreEngine[maxElementIdx].desc}`;
 
-            // 3. 주역 괘 결정 (오늘 날짜 + Seed 조합으로 매일 바뀌게 설정)
-            const todayStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-            const juyeokIndex = (seed + parseInt(todayStr)) % juyeokDb.length;
-            document.getElementById('juyeokGwae').innerText = juyeokDb[juyeokIndex].gwae;
-            document.getElementById('juyeokAnalysis').innerText = juyeokDb[juyeokIndex].desc;
+            // 4. 주역 대운 계산 (일일 변동성 추가를 위해 오늘 날짜 연동)
+            const today = new Date();
+            const todayStr = today.getFullYear().toString() + (today.getMonth()+1).toString() + today.getDate().toString();
+            const juyeokIdx = (seed + parseInt(todayStr)) % juyeokDetailedDb.length;
+            const targetJuyeok = juyeokDetailedDb[juyeokIdx];
 
-            // 4. 오행 보정 로또 번호 생성
-            // 해당 사주 오행의 행운의 숫자 풀에서 2개를 고정 추출하고, 나머지는 1~45 중 랜덤 추출
-            const basePool = luckyNumbersByElement[sajuIndex];
-            let lottoResult = [];
+            document.getElementById('juyeokGwaeTitle').innerText = targetJuyeok.title;
+            document.getElementById('juyeokMain').innerText = targetJuyeok.main;
+            document.getElementById('juyeokWealth').innerText = targetJuyeok.wealth;
+            document.getElementById('juyeokLove').innerText = targetJuyeok.love;
+            document.getElementById('juyeokHealth').innerText = targetJuyeok.health;
+
+            // 5. 오행 보정 로또 번호 알고리즘 추출
+            // 규칙: 가장 부족한 기운(용신) 혹은 가장 강한 기운의 매칭 행운 숫자를 우선 풀(Pool)에 투입
+            const luckyPool = elementLottoMap[sajuCoreEngine[maxElementIdx].element];
+            let lottoNums = [];
             
-            // 행운의 숫자 풀에서 2개 무작위 선택
-            while(lottoResult.length < 2) {
-                let num = basePool[Math.floor(Math.random() * basePool.length)];
-                if(!lottoResult.includes(num)) lottoResult.push(num);
+            // 용신수 풀에서 먼저 2글자 고정 확보
+            while(lottoNums.length < 2) {
+                let pick = luckyPool[Math.floor(Math.random() * luckyPool.length)];
+                if(!lottoNums.includes(pick)) lottoNums.push(pick);
             }
-
-            // 나머지 4개 번호 일반 추출 (중복 제거)
-            while(lottoResult.length < 6) {
-                let num = Math.floor(Math.random() * 45) + 1;
-                if(!lottoResult.includes(num)) lottoResult.push(num);
+            // 완전 무작위수로 나머지 4글자 충당
+            while(lottoNums.length < 6) {
+                let pick = Math.floor(Math.random() * 45) + 1;
+                if(!lottoNums.includes(pick)) lottoNums.push(pick);
             }
+            lottoNums.sort((a,b) => a - b);
 
-            // 오름차순 정렬
-            lottoResult.sort((a, b) => a - b);
-
-            // 로또 UI 렌더링
+            // 로또 UI 출력 (실제 한국 로또 디자인 색상 분기 적용)
             const lottoContainer = document.getElementById('lottoNumbers');
             lottoContainer.innerHTML = '';
-            lottoResult.forEach(num => {
-                const ball = document.createElement('span');
-                ball.className = "w-10 h-10 flex items-center justify-center bg-amber-600 text-white font-bold rounded-full border-2 border-amber-400 shadow-sm";
-                // 로또 번호 대역별 색상 구분 효과 (선택사항)
-                if(num <= 10) ball.className += " bg-yellow-500 text-stone-900";
-                else if(num <= 20) ball.className += " bg-blue-600";
-                else if(num <= 30) ball.className += " bg-red-600";
-                else if(num <= 40) ball.className += " bg-gray-600";
-                else ball.className += " bg-green-600";
+            lottoNums.forEach(num => {
+                const ball = document.createElement('div');
+                ball.className = "w-11 h-11 flex items-center justify-center font-black rounded-full text-white text-base ball-shadow border border-white/20";
                 
+                if(num <= 10) ball.className += " bg-gradient-to-br from-amber-400 to-yellow-500 text-stone-900";
+                else if(num <= 20) ball.className += " bg-gradient-to-br from-blue-400 to-blue-600";
+                else if(num <= 30) ball.className += " bg-gradient-to-br from-red-400 to-red-600";
+                else if(num <= 40) ball.className += " bg-gradient-to-br from-stone-400 to-stone-600";
+                else ball.className += " bg-gradient-to-br from-emerald-400 to-emerald-600";
+
                 ball.innerText = num;
                 lottoContainer.appendChild(ball);
             });
 
-            // 화면 전환
+            // 설명 작성
+            document.getElementById('lottoPrinciple').innerText = `귀하의 메인 용신 오행인 [${sajuCoreEngine[maxElementIdx].element}] 기운을 보완·유도하는 선천 행운의 수 (${luckyPool.slice(0,3).join(', ')}...)를 전방에 우선 고정 배치하고 후방에 주역 점괘 궤적의 난수를 조합한 동양 철학적 맞춤형 번호 배합입니다.`;
+
+            // 화면 가시성 전환
             document.getElementById('fortuneForm').classList.add('hidden');
             document.getElementById('resultSection').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
+        // 리셋 함수
         function resetForm() {
             document.getElementById('fortuneForm').reset();
             document.getElementById('fortuneForm').classList.remove('hidden');
