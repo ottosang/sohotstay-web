@@ -20,7 +20,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { display: flex; background-color: var(--bg-color); color: #111827; height: 100vh; overflow: hidden; }
 
-        /* [개선] 통합 로그인 스크린 스타일 */
+        /* 통합 로그인 스크린 스타일 */
         #lock-screen {
             position: fixed; top:0; left:0; width:100vw; height:100vh; background:#111827;
             display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999; color:white;
@@ -102,11 +102,10 @@
 </head>
 <body>
 
-    <!-- [개선] 1. 통합 로그인 화면 (호텔 목록 비노출, 마스터 메뉴 통합) -->
+    <!-- 1. 통합 로그인 화면 -->
     <div id="lock-screen">
         <div class="lock-box">
             <h1 style="font-size: 2.2rem; color:#a5b4fc; margin-bottom:25px; letter-spacing: 1px;">IOKEY</h1>
-            
             <div id="form-login">
                 <div class="form-group" style="text-align: left;">
                     <label style="color:#9ca3af; font-size: 0.8rem;">호텔 고유코드 (Hotel ID / 'master')</label>
@@ -118,7 +117,6 @@
                 </div>
                 <button class="btn" style="width:100%; padding:13px; margin-top:15px; font-size: 1rem;" onclick="executeLogin()">시스템 로그인</button>
             </div>
-            
             <div id="lock-msg" style="color:var(--danger-color); font-size:0.85rem; height:18px; margin-top:15px;"></div>
         </div>
     </div>
@@ -208,10 +206,10 @@
             <thead><tr><th>고유코드 (ID)</th><th>호텔 명칭</th><th>로그인 비밀번호</th><th>보유 객실수</th><th>관리</th></tr></thead>
             <tbody id="master-hotel-list-tbody"></tbody>
         </table>
-        <button class="btn btn-danger" style="margin-top:20px;" onclick="location.reload();">로그아웃 및 대시보드 잠금</button>
+        <button class="btn btn-danger" style="margin-top:20px;" onclick="localStorage.removeItem('iokey_hotel_db'); location.reload();">🔧 시스템 전체 초기화</button>
     </main>
 
-    <!-- 투숙객 전용 모바일 QR 체크인 화면 -->
+    <!-- 투스크객 전용 모바일 QR 체크인 화면 -->
     <div id="customer-qr-screen">
         <div class="mobile-container">
             <div class="mobile-header">
@@ -251,23 +249,15 @@
         let isMasterMode = false;
         let hotelDatabase = {};
 
-        // 초기 가상 데이터 셋 (마스터 권한에서 언제든 수정/삭제 가능)
         const defaultDatabase = {
             "cordelia_sungsan": {
                 name: "코델리아 호텔 - 성산 본점", password: "1111",
                 rooms: ["101", "102", "103", "104", "105"],
                 roomPwds: {"101":"4826", "102":"9153", "103":"7721", "104":"3352", "105":"1289"},
                 pmsList: [
-                    {name: "홍길동", phone: "01012345678", room: "101", status: "대기"},
-                    {name: "김상훈", phone: "01066450220", room: "104", status: "대기"}
+                    {name: "홍길동", phone: "01012345678", room: "101", status: "대기"}
                 ],
                 liveStatus: {}
-            },
-            "cordelia_pension": {
-                name: "코델리아 독채 펜션 - 2호점", password: "2222",
-                rooms: ["A동", "B동", "C동"],
-                roomPwds: {"A동":"1111", "B동":"2222", "C동":"3333"},
-                pmsList: [], liveStatus: {}
             }
         };
 
@@ -289,14 +279,13 @@
             ko: { guide: "예약 정보 조회를 위해 성함과 전화번호를 입력해주세요.", name: "예약자 성함", phone: "전화번호", submit: "조회 및 체크인 시작", success: "✨ 비대면 체크인 완료", room: "배정 객실", pwd: "도어락 비밀번호", notice: "<b>[투숙객 필수 유의사항]</b><br>• 퇴실 시간은 오전 11시입니다.<br>• 객실 내 금연 및 육류/해산물 조리는 전면 금지됩니다.<br>• 이 화면을 캡처하여 보관해 주세요." },
             en: { guide: "Please enter your name and phone number to search for reservation details.", name: "Guest Name", phone: "Phone Number", submit: "Search & Check-In", success: "✨ Self Check-In Complete", room: "Assigned Room", pwd: "Doorlock Password", notice: "<b>[Guest Regulations]</b><br>• Check-out time is 11:00 AM.<br>• No smoking & No cooking of meat/seafood inside rooms.<br>• Please capture/screenshot this screen." },
             zh: { guide: "请输入您的姓名和电话号码以查询您的预订信息。", name: "住客姓名", phone: "电话号码", submit: "查询并办理入住", success: "✨ 自助入住 办理成功", room: "分配的客房", pwd: "门锁密码", notice: "<b>[住客必读须知]</b><br>• 退房时间为上午 11:00。<br>• 客房内全面禁烟，禁止烹饪肉类/海鲜。<br>• 请截图保存此页面。" },
-            ja: { guide: "予約情報を照会するため、お名前と電話番号を入力してください。", name: "宿泊者名", phone: "電話番号", submit: "照会 & チェックイン開始", success: "✨ セルフチェックイン完了", room: "配属客室", pwd: "ドアロック暗証番号", notice: "<b>[宿泊者遵守事項]</b><br>• チェックアウト時間は午前11時です。<br>• 客室全席禁煙、肉・海鮮類の調理は禁止です。<br>• この画面をスクリーンショットして保管してください。" }
+            ja: { guide: "予約情報を照会するため、お名前と電話番号を入力してください。", name: "宿泊者名", phone: "電話番号", submit: "照会 & チェックイン開始", success: "✨ セルフチェックイン完了", room: "配属客室", pwd: "ドアロック暗証番号", notice: "<b>[宿泊者遵守事項]</b><br>• チェックアウト時間は午前11時です。<br>• 客室全席禁煙、肉・海鮮類の調理は禁止です。<br>• この画面을 スクリーンショットして保管してください。" }
         };
 
         window.onload = function() {
             loadDatabase();
         };
 
-        // [개선] 통합 로그인 핸들러 (master / 0880 분기 처리)
         function executeLogin() {
             const inputId = document.getElementById('login-id').value.trim();
             const inputPwd = document.getElementById('login-pwd').value.trim();
@@ -307,20 +296,17 @@
                 return;
             }
 
-            // 마스터 로그인 스캔 분기
             if(inputId === "master" && inputPwd === "0880") {
                 isMasterMode = true;
                 document.getElementById('m-master').style.display = 'block';
                 document.getElementById('lock-screen').style.display = 'none';
                 
-                // 마스터는 등록된 첫 번째 지점을 대시보드 기본값으로 연동
                 currentHotelId = Object.keys(hotelDatabase)[0] || "";
                 if(currentHotelId) document.getElementById('current-hotel-display').innerText = hotelDatabase[currentHotelId].name;
                 switchPage('master');
                 return;
             }
 
-            // 일반 호텔 지점 로그인 스캔 분기
             if(hotelDatabase[inputId] && hotelDatabase[inputId].password === inputPwd) {
                 currentHotelId = inputId;
                 isMasterMode = false;
@@ -345,6 +331,7 @@
             if(!currentHotelId) return;
             const store = hotelDatabase[currentHotelId];
 
+            // 대시보드 렌더링
             let o=0, a=0;
             const container = document.getElementById('dash-room-container');
             container.innerHTML = "";
@@ -372,6 +359,7 @@
             document.getElementById('count-occupied').innerText = o + " 실";
             document.getElementById('count-available').innerText = a + " 실";
 
+            // 도어락 비번 렌더링
             const pwdTbody = document.getElementById('room-pwd-table-body');
             pwdTbody.innerHTML = "";
             store.rooms.forEach(rm => {
@@ -380,14 +368,18 @@
                 pwdTbody.appendChild(tr);
             });
 
+            // [수정] 예약자 리스트 테이블 바인딩 완벽 처리
             const pmsTbody = document.getElementById('pms-list-table-body');
             pmsTbody.innerHTML = "";
-            store.pmsList.forEach((p, i) => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${p.name}</td><td>${p.phone}</td><td>${p.room}호</td><td><strong style="color:green;">${p.status}</strong></td><td><button class="btn btn-danger" onclick="delPms(${i})">삭제</button></td>`;
-                pmsTbody.appendChild(tr);
-            });
+            if(store.pmsList) {
+                store.pmsList.forEach((p, i) => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${p.name}</td><td>${p.phone}</td><td>${p.room}호</td><td><strong style="color:${p.status==='완료'?'green':'gray'};">${p.status}</strong></td><td><button class="btn btn-danger" style="padding: 4px 8px; font-size: 0.8rem;" onclick="delPms(${i})">삭제</button></td>`;
+                    pmsTbody.appendChild(tr);
+                });
+            }
 
+            // 마스터 지점 리스트 렌더링
             const mTbody = document.getElementById('master-hotel-list-tbody');
             mTbody.innerHTML = "";
             Object.keys(hotelDatabase).forEach(id => {
@@ -413,13 +405,36 @@
             renderViews(); 
         }
         
+        // [수정 핵심] 마스터 모드 진입 유무와 상관없이 선택/작동 중인 지점에 유기적으로 데이터 안착 처리
         function addPmsList() {
-            const name = document.getElementById('pms-add-name').value;
-            const phone = document.getElementById('pms-add-phone').value;
-            const room = document.getElementById('pms-add-room').value;
-            if(!name || !phone || !room) return;
-            hotelDatabase[currentHotelId].pmsList.push({name, phone, room, status:"대기"});
+            if(!currentHotelId) {
+                alert("현재 제어 중인 호텔 코드가 지정되지 않았습니다. 일반 호텔 계정으로 재로그인해 주세요.");
+                return;
+            }
+            
+            const name = document.getElementById('pms-add-name').value.trim();
+            const phone = document.getElementById('pms-add-phone').value.trim();
+            const room = document.getElementById('pms-add-room').value.trim();
+            
+            if(!name || !phone || !room) {
+                alert("고객명, 전화번호, 배정 객실 정보를 모두 입력해 주세요.");
+                return;
+            }
+
+            if(!hotelDatabase[currentHotelId].pmsList) {
+                hotelDatabase[currentHotelId].pmsList = [];
+            }
+
+            // 배열 추가 연동
+            hotelDatabase[currentHotelId].pmsList.push({ name: name, phone: phone, room: room, status: "대기" });
             saveDatabase();
+            
+            // 입력 폼 초기화 편의성 개선
+            document.getElementById('pms-add-name').value = "";
+            document.getElementById('pms-add-phone').value = "";
+            document.getElementById('pms-add-room').value = "";
+            
+            alert(`🎉 ${name} 고객님의 당일 예약 정보가 성공적으로 바인딩되었습니다.`);
             renderViews();
         }
 
@@ -446,7 +461,8 @@
             
             saveDatabase();
             alert("호텔 데이터가 내부 저장소(LocalStorage)에 영구 반영되었습니다.");
-            clearMasterForm(); renderViews();
+            clearMasterForm(); 
+            renderViews();
         }
 
         function deleteHotel(id) {
@@ -498,6 +514,7 @@
             const phone = document.getElementById('qr-input-phone').value.trim();
             const store = hotelDatabase[currentHotelId];
             
+            if(!store.pmsList) return alert("등록된 예약 정보가 없습니다.");
             let matched = store.pmsList.find(p => p.name === name && phone.includes(p.phone));
 
             if(matched) {
