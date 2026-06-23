@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IOKEY - 호텔 셀프 체크인 및 관리 시스템</title>
+    <title>IOKEY - 멀티 호텔 셀프 체크인 시스템</title>
     <style>
         :root {
             --primary-color: #4f46e5;
@@ -60,8 +60,6 @@
         
         .room-card.status-available { border-color: #e5e7eb; }
         .room-card.status-available .status-badge { background: #f3f4f6; color: #4b5563; }
-        .room-card.status-dirty { border-color: #fde68a; background: #fffbeb; }
-        .room-card.status-dirty .status-badge { background: #f59e0b; color: white; }
         .room-card.status-occupied { border-color: #a7f3d0; background: #f0fdf4; }
         .room-card.status-occupied .status-badge { background: #10b981; color: white; }
 
@@ -98,6 +96,9 @@
         .mobile-header { background: var(--primary-color); color: white; padding: 24px; text-align: center; }
         .mobile-body { padding: 24px; }
         .result-box { background: #f0fdf4; border: 1px solid #a7f3d0; border-radius: 12px; padding: 20px; margin-top: 15px; display: none; }
+
+        /* QR 링크 스타일 박스 */
+        .qr-link-box { background: #f9fafb; border: 1px solid #d1d5db; padding: 12px; border-radius: 6px; font-family: monospace; font-size: 0.85rem; color: #2563eb; margin-top: 6px; word-break: break-all; }
     </style>
 </head>
 <body>
@@ -139,7 +140,6 @@
         <div class="dashboard-summary">
             <div class="summary-card"><div class="title">재실/운영중</div><div class="value" id="count-occupied" style="color:var(--success-color)">0 실</div></div>
             <div class="summary-card"><div class="title">예약가능 (공실)</div><div class="value" id="count-available" style="color:var(--info-color)">0 실</div></div>
-            <div class="summary-card"><div class="title">정비/점검 필요</div><div class="value" id="count-dirty" style="color:var(--warning-color)">0 실</div></div>
             <div class="summary-card"><div class="title">오늘 정산 매출</div><div class="value">0 원</div></div>
         </div>
         <div class="dashboard-grid">
@@ -150,7 +150,7 @@
             <div class="control-panel">
                 <div class="panel-title">객실 수동 제어: <span id="selected-room-title" style="color:var(--primary-color)">-</span></div>
                 <div class="form-group"><label>고객명</label><input type="text" id="ctrl-name"></div>
-                <div class="form-group"><label>연락처</label><input type="text" id="ctrl-phone"></div>
+                <div class="form-group"><label>투숙 기간 설정</label><input type="text" id="ctrl-period" placeholder="예: 1박 2일"></div>
                 <button class="btn-action" onclick="applyLiveCheckin()">수동 강제 체크인</button>
             </div>
         </div>
@@ -168,17 +168,26 @@
     <!-- [화면 3] 예약자 명단 관리 -->
     <main id="page-pms" class="main-content">
         <div class="content-header"><h2>📅 당일 PMS 예약자 명단 (15시 이전 세팅)</h2></div>
+        
+        <!-- [개선 2] 업체별 고객 체크인 전용 QR URL 안내 구역 -->
+        <div style="background:#eff6ff; padding:16px; border-radius:12px; border:1px solid #bfdbfe; margin-bottom:20px;">
+            <h4 style="font-size:0.9rem; color:#1e40af; font-weight:bold;">🔗 본 지점 전용 무인 체크인 QR 안내 링크 주소</h4>
+            <p style="font-size:0.8rem; color:#1e3a8a; margin-top:2px;">이 주소값을 QR코드 생성기에 넣어서 현관문에 부착하시면 됩니다.</p>
+            <div class="qr-link-box" id="hotel-qr-url-text">https://iokey.io/checkin?hotel=코드</div>
+        </div>
+
         <div style="background:white; padding:20px; border-radius:12px; border:1px solid var(--card-border); margin-bottom:20px;">
-            <h3 style="font-size:1rem; margin-bottom:12px;">+ 당일 예약자 추가</h3>
+            <h3 style="font-size:1rem; margin-bottom:12px;">+ 당일 예약자 추가 (마진맥스 화면 참고)</h3>
             <div class="form-row">
-                <div class="form-group"><label>고객명</label><input type="text" id="pms-add-name" placeholder="홍길동"></div>
-                <div class="form-group"><label>전화번호</label><input type="text" id="pms-add-phone" placeholder="01012345678"></div>
-                <div class="form-group"><label>배정 객실</label><input type="text" id="pms-add-room" placeholder="101"></div>
+                <div class="form-group"><label>고객명 (성함)</label><input type="text" id="pms-add-name" placeholder="예: 김도희"></div>
+                <div class="form-group"><label>전화번호 또는 안심번호 뒤 4자리</label><input type="text" id="pms-add-phone" placeholder="예: 4749 (빈칸 가능)"></div>
+                <div class="form-group"><label>숙박 기간</label><input type="text" id="pms-add-period" value="1박 2일" placeholder="예: 2박 3일"></div>
+                <div class="form-group"><label>배정 객실</label><input type="text" id="pms-add-room" placeholder="예: A동"></div>
             </div>
             <button class="btn" onclick="addPmsList()">예약자 등록</button>
         </div>
         <table style="background:white; border:1px solid var(--card-border);">
-            <thead><tr><th>예약자 성함</th><th>연락처</th><th>배정 객실</th><th>체크인 상태</th><th>작업</th></tr></thead>
+            <thead><tr><th>예약자 성함</th><th>연락처(안심번호)</th><th>숙박 기간</th><th>배정 객실</th><th>체크인 상태</th><th>작업</th></tr></thead>
             <tbody id="pms-list-table-body"></tbody>
         </table>
     </main>
@@ -190,12 +199,12 @@
         <div style="background:white; padding:20px; border-radius:12px; border:1px solid var(--card-border); margin-bottom:24px;">
             <h3 style="font-size:1rem; margin-bottom:15px; color:var(--primary-color);">[+] 신규 호텔(지점) 등록 / 수정</h3>
             <div class="form-row">
-                <div class="form-group"><label>호텔 고유코드 (로그인 ID로 사용됨)</label><input type="text" id="m-hotel-id" placeholder="예: cordelia_sungsan"></div>
-                <div class="form-group"><label>호텔 이름(명칭)</label><input type="text" id="m-hotel-name" placeholder="예: 코델리아 호텔 성산점"></div>
+                <div class="form-group"><label>호텔 고유코드 (로그인 ID 및 QR 주소용)</label><input type="text" id="m-hotel-id" placeholder="예: sohostay"></div>
+                <div class="form-group"><label>호텔 이름(명칭)</label><input type="text" id="m-hotel-name" placeholder="예: 제주 소하스테이 애견동반 펜션"></div>
             </div>
             <div class="form-row">
                 <div class="form-group"><label>접속 로그인 비밀번호</label><input type="text" id="m-hotel-pwd" placeholder="1234"></div>
-                <div class="form-group"><label>객실 목록 구성 (콤마 구분)</label><input type="text" id="m-hotel-rooms" placeholder="101,102,103,104,105"></div>
+                <div class="form-group"><label>객실 목록 구성 (콤마 구분)</label><input type="text" id="m-hotel-rooms" placeholder="A동,B동,F동,G동,H동"></div>
             </div>
             <button class="btn" onclick="saveNewHotel()">호텔 데이터베이스 생성 / 수정 적용</button>
             <button class="btn btn-secondary" onclick="clearMasterForm()">입력창 비우기</button>
@@ -209,7 +218,7 @@
         <button class="btn btn-danger" style="margin-top:20px;" onclick="localStorage.removeItem('iokey_hotel_db'); location.reload();">🔧 시스템 전체 초기화</button>
     </main>
 
-    <!-- 투스크객 전용 모바일 QR 체크인 화면 -->
+    <!-- 투숙객 전용 모바일 QR 체크인 화면 -->
     <div id="customer-qr-screen">
         <div class="mobile-container">
             <div class="mobile-header">
@@ -225,8 +234,14 @@
                 </div>
 
                 <p id="txt-guide" style="font-size:0.85rem; text-align:center; color:#4b5563; margin-bottom:15px;">예약 정보 조회를 위해 성함과 전화번호를 입력해주세요.</p>
-                <div class="form-group"><label id="lbl-name">예약자 성함 (Name)</label><input type="text" id="qr-input-name" placeholder="ex) 홍길동"></div>
-                <div class="form-group"><label id="lbl-phone">전화번호 (Phone)</label><input type="text" id="qr-input-phone" placeholder="ex) 01012345678"></div>
+                <div class="form-group"><label id="lbl-name">예약자 성함 (Name)</label><input type="text" id="qr-input-name" placeholder="ex) 김도희"></div>
+                
+                <!-- [개선 3] 안심번호 입력 안내 가이드 보강 -->
+                <div class="form-group">
+                    <label id="lbl-phone">전화번호 또는 안심번호 뒷자리 (Phone)</label>
+                    <input type="text" id="qr-input-phone" placeholder="전화번호 또는 안심번호 뒤 4자리 입력">
+                    <p style="font-size:0.75rem; color:#6b7280; margin-top:4px;">※ 마진맥스 화면에 안심번호(050...)로 등록된 고객은 뒷자리 4자리를 적어주세요. 정보가 없는 경우 비워두셔도 됩니다.</p>
+                </div>
                 
                 <button class="btn" id="btn-submit" style="width:100%; padding:14px; margin-top:10px;" onclick="executeCustomerCheckin()">조회 및 체크인 시작</button>
                 <button class="btn btn-secondary" style="width:100%; padding:8px; margin-top:8px; font-size:0.8rem;" onclick="closeCustomerQR()">대시보드로 복귀</button>
@@ -234,6 +249,9 @@
                 <div class="result-box" id="qr-result-area">
                     <h3 id="txt-success-title" style="color:var(--success-color); font-size:1.1rem; border-bottom:1px solid #a7f3d0; padding-bottom:6px; margin-bottom:10px;">✨ 체크인 완료</h3>
                     <p style="font-size:0.95rem; margin-bottom:6px;"><span id="txt-res-room">배정 객실</span>: <strong id="res-room" style="font-size:1.2rem; color:var(--primary-color);">-</strong></p>
+                    
+                    <!-- [개선 1] 체크인 완료창에 몇박몇일 기간 노출 -->
+                    <p style="font-size:0.95rem; margin-bottom:6px;"><span>숙박 기간 (Period)</span>: <strong id="res-period" style="color:#111827;">-</strong></p>
                     <p style="font-size:0.95rem; margin-bottom:12px;"><span id="txt-res-pwd">도어락 비밀번호</span>: <strong id="res-pwd" style="font-size:1.2rem; color:var(--danger-color);">-</strong></p>
                     
                     <div id="txt-notice-box" style="background:white; padding:12px; border-radius:6px; font-size:0.8rem; color:#4b5563; line-height:1.4; border:1px solid #e5e7eb;"></div>
@@ -249,13 +267,15 @@
         let isMasterMode = false;
         let hotelDatabase = {};
 
+        // 마진맥스 실데이터 기반 셋업 초기화 적용
         const defaultDatabase = {
-            "cordelia_sungsan": {
-                name: "코델리아 호텔 - 성산 본점", password: "1111",
-                rooms: ["101", "102", "103", "104", "105"],
-                roomPwds: {"101":"4826", "102":"9153", "103":"7721", "104":"3352", "105":"1289"},
+            "sohostay": {
+                name: "제주 소하스테이 애견동반 펜션", password: "1111",
+                rooms: ["A동", "B동", "F동", "G동", "H동"],
+                roomPwds: {"A동":"4826", "B동":"9153", "F동":"7721", "G동":"3352", "H동":"1289"},
                 pmsList: [
-                    {name: "홍길동", phone: "01012345678", room: "101", status: "대기"}
+                    {name: "김도희", phone: "4749", room: "A동", period: "1박 2일", status: "대기"},
+                    {name: "박규담", phone: "6734", room: "F동", period: "2박 3일", status: "대기"}
                 ],
                 liveStatus: {}
             }
@@ -276,10 +296,10 @@
         }
 
         const dictionary = {
-            ko: { guide: "예약 정보 조회를 위해 성함과 전화번호를 입력해주세요.", name: "예약자 성함", phone: "전화번호", submit: "조회 및 체크인 시작", success: "✨ 비대면 체크인 완료", room: "배정 객실", pwd: "도어락 비밀번호", notice: "<b>[투숙객 필수 유의사항]</b><br>• 퇴실 시간은 오전 11시입니다.<br>• 객실 내 금연 및 육류/해산물 조리는 전면 금지됩니다.<br>• 이 화면을 캡처하여 보관해 주세요." },
-            en: { guide: "Please enter your name and phone number to search for reservation details.", name: "Guest Name", phone: "Phone Number", submit: "Search & Check-In", success: "✨ Self Check-In Complete", room: "Assigned Room", pwd: "Doorlock Password", notice: "<b>[Guest Regulations]</b><br>• Check-out time is 11:00 AM.<br>• No smoking & No cooking of meat/seafood inside rooms.<br>• Please capture/screenshot this screen." },
-            zh: { guide: "请输入您的姓名和电话号码以查询您的预订信息。", name: "住客姓名", phone: "电话号码", submit: "查询并办理入住", success: "✨ 自助入住 办理成功", room: "分配的客房", pwd: "门锁密码", notice: "<b>[住客必读须知]</b><br>• 退房时间为上午 11:00。<br>• 客房内全面禁烟，禁止烹饪肉类/海鲜。<br>• 请截图保存此页面。" },
-            ja: { guide: "予約情報を照会するため、お名前と電話番号を入力してください。", name: "宿泊者名", phone: "電話番号", submit: "照会 & チェックイン開始", success: "✨ セルフチェックイン完了", room: "配属客室", pwd: "ドアロック暗証番号", notice: "<b>[宿泊者遵守事項]</b><br>• チェックアウト時間は午前11時です。<br>• 客室全席禁煙、肉・海鮮類の調理は禁止です。<br>• この画面을 スクリーンショットして保管してください。" }
+            ko: { guide: "예약 정보 조회를 위해 성함과 전화번호를 입력해주세요.", name: "예약자 성함", phone: "전화번호 또는 안심번호 뒷자리", submit: "조회 및 체크인 시작", success: "✨ 비대면 체크인 완료", room: "배정 객실", pwd: "도어락 비밀번호", notice: "<b>[투숙객 필수 유의사항]</b><br>• 퇴실 시간은 오전 11시입니다.<br>• 객실 내 금연 및 육류/해산물 조리는 전면 금지됩니다.<br>• 이 화면을 캡처하여 보관해 주세요." },
+            en: { guide: "Please enter your name and phone number to search for reservation details.", name: "Guest Name", phone: "Phone / Safe Number digits", submit: "Search & Check-In", success: "✨ Self Check-In Complete", room: "Assigned Room", pwd: "Doorlock Password", notice: "<b>[Guest Regulations]</b><br>• Check-out time is 11:00 AM.<br>• No smoking & No cooking of meat/seafood inside rooms.<br>• Please capture/screenshot this screen." },
+            zh: { guide: "请输入您的姓名和电话号码以查询您的预订信息。", name: "住客姓名", phone: "电话号码", submit: "查询并办理入住", success: "✨ 自助入住 办理成功", room: "分配의 客房", pwd: "门锁密码", notice: "<b>[住客必读须知]</b><br>• 退房时间为上午 11:00。<br>• 客房内全面禁烟，禁止烹饪肉类/海鲜。<br>• 请截图保存此页面。" },
+            ja: { guide: "予約情報を照会するため、お名前と電話番号を入力してください。", name: "宿泊者名", phone: "電話番号", submit: "照会 & チェックイン開始", success: "✨ セルフチェックイン完了", room: "配属客室", pwd: "ドアロック暗証番号", notice: "<b>[宿泊者遵守事項]</b><br>• チェックアウト時間は午前11時です。<br>• 客室全席禁煙、肉・海鮮類の調理は禁止です。<br>• この画面をスクリーンショットして保管してください。" }
         };
 
         window.onload = function() {
@@ -302,7 +322,11 @@
                 document.getElementById('lock-screen').style.display = 'none';
                 
                 currentHotelId = Object.keys(hotelDatabase)[0] || "";
-                if(currentHotelId) document.getElementById('current-hotel-display').innerText = hotelDatabase[currentHotelId].name;
+                if(currentHotelId) {
+                    document.getElementById('current-hotel-display').innerText = hotelDatabase[currentHotelId].name;
+                    // [개선 2] QR URL 업데이트
+                    document.getElementById('hotel-qr-url-text').innerText = `https://iokey.io/checkin?hotel=${currentHotelId}`;
+                }
                 switchPage('master');
                 return;
             }
@@ -313,6 +337,8 @@
                 document.getElementById('m-master').style.display = 'none';
                 document.getElementById('lock-screen').style.display = 'none';
                 document.getElementById('current-hotel-display').innerText = hotelDatabase[inputId].name;
+                // [개선 2] QR URL 업데이트
+                document.getElementById('hotel-qr-url-text').innerText = `https://iokey.io/checkin?hotel=${currentHotelId}`;
                 switchPage('dashboard');
             } else {
                 msg.innerText = "❌ 호텔 고유코드 또는 비밀번호가 올바르지 않습니다.";
@@ -331,7 +357,6 @@
             if(!currentHotelId) return;
             const store = hotelDatabase[currentHotelId];
 
-            // 대시보드 렌더링
             let o=0, a=0;
             const container = document.getElementById('dash-room-container');
             container.innerHTML = "";
@@ -348,8 +373,11 @@
                     renderViews();
                 };
                 card.innerHTML = `
-                    <div class="room-header"><span class="room-name">${rm}호</span><span class="status-badge">${status==='occupied'?'이용중':'예약가능'}</span></div>
-                    <div class="room-details"><div><span>비번</span><span>${store.roomPwds[rm] || '미지정'}</span></div></div>
+                    <div class="room-header"><span class="room-name">${rm}</span><span class="status-badge">${status==='occupied'?'이용중':'예약가능'}</span></div>
+                    <div class="room-details">
+                        <div><span>비번</span><span>${store.roomPwds[rm] || '미지정'}</span></div>
+                        <div><span>기간</span><span>${store.liveStatus[rm] ? store.liveStatus[rm].period : '-'}</span></div>
+                    </div>
                     <div class="room-btn-group">
                         <button onclick="event.stopPropagation(); changeStatus('${rm}', 'available')">공실화</button>
                     </div>
@@ -359,27 +387,24 @@
             document.getElementById('count-occupied').innerText = o + " 실";
             document.getElementById('count-available').innerText = a + " 실";
 
-            // 도어락 비번 렌더링
             const pwdTbody = document.getElementById('room-pwd-table-body');
             pwdTbody.innerHTML = "";
             store.rooms.forEach(rm => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td><strong>${rm}호</strong></td><td><input type="text" id="pwd-${rm}" value="${store.roomPwds[rm]||''}"></td><td><button class="btn" onclick="savePwd('${rm}')">저장</button></td>`;
+                tr.innerHTML = `<td><strong>${rm}</strong></td><td><input type="text" id="pwd-${rm}" value="${store.roomPwds[rm]||''}"></td><td><button class="btn" onclick="savePwd('${rm}')">저장</button></td>`;
                 pwdTbody.appendChild(tr);
             });
 
-            // [수정] 예약자 리스트 테이블 바인딩 완벽 처리
             const pmsTbody = document.getElementById('pms-list-table-body');
             pmsTbody.innerHTML = "";
             if(store.pmsList) {
                 store.pmsList.forEach((p, i) => {
                     const tr = document.createElement('tr');
-                    tr.innerHTML = `<td>${p.name}</td><td>${p.phone}</td><td>${p.room}호</td><td><strong style="color:${p.status==='완료'?'green':'gray'};">${p.status}</strong></td><td><button class="btn btn-danger" style="padding: 4px 8px; font-size: 0.8rem;" onclick="delPms(${i})">삭제</button></td>`;
+                    tr.innerHTML = `<td>${p.name}</td><td>${p.phone || '<span style="color:#9ca3af">정보없음</span>'}</td><td><b>${p.period}</b></td><td>${p.room}</td><td><strong style="color:${p.status==='완료'?'green':'gray'};">${p.status}</strong></td><td><button class="btn btn-danger" style="padding: 4px 8px; font-size: 0.8rem;" onclick="delPms(${i})">삭제</button></td>`;
                     pmsTbody.appendChild(tr);
                 });
             }
 
-            // 마스터 지점 리스트 렌더링
             const mTbody = document.getElementById('master-hotel-list-tbody');
             mTbody.innerHTML = "";
             Object.keys(hotelDatabase).forEach(id => {
@@ -391,56 +416,40 @@
 
         let currentSelectedRoomNum = null;
         function changeStatus(rm, stat) { delete hotelDatabase[currentHotelId].liveStatus[rm]; saveDatabase(); renderViews(); }
+        function savePwd(rm) { hotelDatabase[currentHotelId].roomPwds[rm] = document.getElementById('pwd-'+rm).value; saveDatabase(); alert('매핑 저장 완료'); renderViews(); }
+        function delPms(i) { hotelDatabase[currentHotelId].pmsList.splice(i,1); saveDatabase(); renderViews(); }
         
-        function savePwd(rm) { 
-            hotelDatabase[currentHotelId].roomPwds[rm] = document.getElementById('pwd-'+rm).value; 
-            saveDatabase();
-            alert('매핑 저장 완료'); 
-            renderViews(); 
-        }
-        
-        function delPms(i) { 
-            hotelDatabase[currentHotelId].pmsList.splice(i,1); 
-            saveDatabase();
-            renderViews(); 
-        }
-        
-        // [수정 핵심] 마스터 모드 진입 유무와 상관없이 선택/작동 중인 지점에 유기적으로 데이터 안착 처리
         function addPmsList() {
-            if(!currentHotelId) {
-                alert("현재 제어 중인 호텔 코드가 지정되지 않았습니다. 일반 호텔 계정으로 재로그인해 주세요.");
-                return;
-            }
-            
+            if(!currentHotelId) return;
             const name = document.getElementById('pms-add-name').value.trim();
             const phone = document.getElementById('pms-add-phone').value.trim();
+            const period = document.getElementById('pms-add-period').value.trim();
             const room = document.getElementById('pms-add-room').value.trim();
             
-            if(!name || !phone || !room) {
-                alert("고객명, 전화번호, 배정 객실 정보를 모두 입력해 주세요.");
+            if(!name || !room) {
+                alert("고객명과 배정 객실은 필수 항목입니다.");
                 return;
             }
 
-            if(!hotelDatabase[currentHotelId].pmsList) {
-                hotelDatabase[currentHotelId].pmsList = [];
-            }
+            if(!hotelDatabase[currentHotelId].pmsList) hotelDatabase[currentHotelId].pmsList = [];
 
-            // 배열 추가 연동
-            hotelDatabase[currentHotelId].pmsList.push({ name: name, phone: phone, room: room, status: "대기" });
+            hotelDatabase[currentHotelId].pmsList.push({ name, phone, period, room, status: "대기" });
             saveDatabase();
             
-            // 입력 폼 초기화 편의성 개선
             document.getElementById('pms-add-name').value = "";
             document.getElementById('pms-add-phone').value = "";
+            document.getElementById('pms-add-period').value = "1박 2일";
             document.getElementById('pms-add-room').value = "";
             
-            alert(`🎉 ${name} 고객님의 당일 예약 정보가 성공적으로 바인딩되었습니다.`);
             renderViews();
         }
 
         function applyLiveCheckin() {
             if(!currentSelectedRoomNum) return;
-            hotelDatabase[currentHotelId].liveStatus[currentSelectedRoomNum] = { name: document.getElementById('ctrl-name').value };
+            hotelDatabase[currentHotelId].liveStatus[currentSelectedRoomNum] = { 
+                name: document.getElementById('ctrl-name').value,
+                period: document.getElementById('ctrl-period').value || '1박 2일'
+            };
             saveDatabase();
             renderViews();
         }
@@ -460,17 +469,12 @@
             hotelDatabase[id].rooms = rms.split(',').map(s=>s.trim()).filter(s=>s!=="");
             
             saveDatabase();
-            alert("호텔 데이터가 내부 저장소(LocalStorage)에 영구 반영되었습니다.");
-            clearMasterForm(); 
-            renderViews();
+            alert("호텔 데이터가 내부 저장소에 반영되었습니다.");
+            clearMasterForm(); renderViews();
         }
 
         function deleteHotel(id) {
-            if(confirm("해당 호텔의 모든 투숙 및 설정 데이터가 영구 파기됩니다. 삭제하시겠습니까?")) {
-                delete hotelDatabase[id];
-                saveDatabase();
-                renderViews();
-            }
+            if(confirm("정말 삭제하시겠습니까?")) { delete hotelDatabase[id]; saveDatabase(); renderViews(); }
         }
         function loadMasterForm(id) {
             document.getElementById('m-hotel-id').value = id;
@@ -487,6 +491,8 @@
             if(!currentHotelId) return alert('먼저 대시보드에 로그인해 주세요.');
             document.getElementById('qr-hotel-name-view').innerText = hotelDatabase[currentHotelId].name;
             document.getElementById('qr-result-area').style.display = 'none';
+            document.getElementById('qr-input-name').value = "";
+            document.getElementById('qr-input-phone').value = "";
             changeLanguage('ko');
             document.getElementById('customer-qr-screen').style.display = 'flex';
         }
@@ -496,38 +502,49 @@
             currentLang = lang;
             document.querySelectorAll('.lang-tabs button').forEach(b => b.classList.remove('active'));
             document.getElementById('lang-' + lang).classList.add('active');
-
             const d = dictionary[lang];
             document.getElementById('txt-guide').innerText = d.guide;
             document.getElementById('lbl-name').innerText = d.name;
             document.getElementById('lbl-phone').innerText = d.phone;
             document.getElementById('btn-submit').innerText = d.submit;
-            
             document.getElementById('txt-success-title').innerText = d.success;
             document.getElementById('txt-res-room').innerText = d.room;
             document.getElementById('txt-res-pwd').innerText = d.pwd;
             document.getElementById('txt-notice-box').innerHTML = d.notice;
         }
 
+        // [개선 1, 3] 복합 안심번호 매칭 및 기간 노출 알고리즘 적용
         function executeCustomerCheckin() {
             const name = document.getElementById('qr-input-name').value.trim();
             const phone = document.getElementById('qr-input-phone').value.trim();
             const store = hotelDatabase[currentHotelId];
             
             if(!store.pmsList) return alert("등록된 예약 정보가 없습니다.");
-            let matched = store.pmsList.find(p => p.name === name && phone.includes(p.phone));
+            
+            // 이름과 입력 정보(안심번호 매칭 포함) 분석 스캔
+            let matched = store.pmsList.find(p => {
+                // 1. 이름이 같아야 함
+                if (p.name !== name) return false;
+                
+                // 2. 마진맥스에 번호가 비어있으면 이름만 같아도 통과
+                if (!p.phone || p.phone === "") return true;
+                
+                // 3. 번호가 기입되어 있으면 뒷자리 매칭 체크
+                return phone.includes(p.phone) || p.phone.includes(phone);
+            });
 
             if(matched) {
-                store.liveStatus[matched.room] = { name: name };
+                store.liveStatus[matched.room] = { name: name, period: matched.period };
                 matched.status = "완료";
                 
-                document.getElementById('res-room').innerText = matched.room + "호";
+                document.getElementById('res-room').innerText = matched.room;
+                document.getElementById('res-period').innerText = matched.period; // 몇박몇일 적용
                 document.getElementById('res-pwd').innerText = store.roomPwds[matched.room] || "0000";
                 document.getElementById('qr-result-area').style.display = 'block';
                 saveDatabase();
                 renderViews();
             } else {
-                alert(currentLang === 'ko' ? "예약 정보를 찾을 수 없습니다." : "Reservation not found.");
+                alert(currentLang === 'ko' ? "예약 정보를 찾을 수 없습니다.\n성함과 마진맥스에 기재된 번호를 다시 확인해 주세요." : "Reservation not found.");
             }
         }
     </script>
